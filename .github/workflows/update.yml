@@ -1,55 +1,59 @@
 name: update-stock-brief
- 
+
 on:
   schedule:
-    # GitHub Actions cron 은 UTC. 평일(월~금).
-    - cron: '30 6 * * 1-5'   # ~15:30 KST → 투자자 동향 창
-    - cron: '57 8 * * 1-5'   # ~17:57 KST → 공매도 잔고 창
+    # GitHub Actions cron 은 UTC. 평일(월~금). 실제 발사는 수 분 지연될 수 있음.
+    - cron: '30 6 * * 1-5'   # ~15:30 KST → KRX 마감(잠정 통합)
+    - cron: '57 8 * * 1-5'   # ~17:57 KST → 공매도 잔고
+    - cron: '5 11 * * 1-5'   # ~20:05 KST → NXT 마감(확정 통합)
   workflow_dispatch:
     inputs:
       mode:
         description: '수동 실행 모드'
         default: 'invest'
         type: choice
-        options: [invest, short]
- 
+        options: [invest, short, final]
+
 permissions:
   contents: write
- 
+
 concurrency:
   group: stock-brief
   cancel-in-progress: false
- 
+
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
-    env:                                 # KRX 로그인 (회원제 전환 대응)
+    timeout-minutes: 24
+    env:
       KRX_ID: ${{ secrets.KRX_ID }}
       KRX_PW: ${{ secrets.KRX_PW }}
+      KIS_APPKEY: ${{ secrets.KIS_APPKEY }}
+      KIS_APPSECRET: ${{ secrets.KIS_APPSECRET }}
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
-      - run: pip install pykrx pandas
- 
+      - run: pip install pykrx pandas requests
+
       - name: Determine mode
         id: m
         run: |
-          if   [ "${{ github.event.schedule }}" = "30 6 * * 1-5" ]; then echo "mode=invest" >> "$GITHUB_OUTPUT"
-          elif [ "${{ github.event.schedule }}" = "57 8 * * 1-5" ]; then echo "mode=short"  >> "$GITHUB_OUTPUT"
+          if   [ "${{ github.event.schedule }}" = "30 6 * * 1-5" ];  then echo "mode=invest" >> "$GITHUB_OUTPUT"
+          elif [ "${{ github.event.schedule }}" = "57 8 * * 1-5" ];  then echo "mode=short"  >> "$GITHUB_OUTPUT"
+          elif [ "${{ github.event.schedule }}" = "5 11 * * 1-5" ];  then echo "mode=final"  >> "$GITHUB_OUTPUT"
           else echo "mode=${{ github.event.inputs.mode || 'invest' }}" >> "$GITHUB_OUTPUT"
           fi
- 
+
       - name: Poll & collect
         run: |
-          if [ "${{ steps.m.outputs.mode }}" = "short" ]; then
-            python poll.py --mode short  --interval 60 --max-minutes 16
-          else
-            python poll.py --mode invest --interval 30 --max-minutes 9
-          fi
- 
+          case "${{ steps.m.outputs.mode }}" in
+            short) python poll.py --mode short  --interval 60 --max-minutes 16 ;;
+            final) python poll.py --mode final  --interval 60 --max-minutes 20 ;;
+            *)     python poll.py --mode invest --interval 30 --max-minutes 9  ;;
+          esac
+
       - name: Commit data.json (변경분만)
         run: |
           git config user.name  "stock-bot"
@@ -61,4 +65,3 @@ jobs:
             git commit -m "data: ${{ steps.m.outputs.mode }} $(date -u +'%Y-%m-%d %H:%M UTC')"
             git push
           fi
- 
