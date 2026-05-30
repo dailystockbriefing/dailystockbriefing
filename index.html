@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>펩트론 데일리 브리핑</title>
+<meta property="og:title" content="펩트론 데일리 브리핑">
+<meta property="og:description" content="투자자 매매동향 · 공매도 잔고 · 매매 특이점 — 매 영업일 갱신">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-mono@5.0.13/index.min.css">
+<style>
+  :root{
+    --bg:#0a0d13; --panel:#11151f; --panel-2:#161b27;
+    --line:rgba(255,255,255,.07); --line-strong:rgba(255,255,255,.13);
+    --text:#e8ebf2; --muted:#838da0; --faint:#5a6173;
+    --up:#ff5b62; --up-dim:rgba(255,91,98,.13);
+    --down:#4f9dff; --down-dim:rgba(79,157,255,.13);
+    --warn:#e0a93c; --warn-dim:rgba(224,169,60,.13);
+    --info:#7c8aa3; --info-dim:rgba(124,138,163,.12);
+    --gold:#d9b06a; --flat:#9aa3b5;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --sans:'Pretendard',-apple-system,system-ui,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    background:var(--bg); color:var(--text); font-family:var(--sans);
+    line-height:1.5; min-height:100vh; -webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(120% 55% at 50% -10%, rgba(217,176,106,.06), transparent 60%),
+      radial-gradient(80% 50% at 100% 100%, rgba(79,157,255,.05), transparent 70%);
+  }
+  .wrap{max-width:560px;margin:0 auto;padding:22px 16px 48px;}
+
+  /* Header */
+  header{margin-bottom:20px;padding-bottom:18px;border-bottom:1px solid var(--line-strong);}
+  .kicker{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);font-weight:600;}
+  .sample-badge{display:none;margin-left:9px;font-size:10px;font-family:var(--mono);letter-spacing:.05em;
+    color:var(--warn);background:var(--warn-dim);border:1px solid rgba(224,169,60,.45);border-radius:6px;padding:2px 7px;vertical-align:middle;}
+  .name-row{display:flex;align-items:flex-end;gap:10px;margin:7px 0 12px;}
+  h1{font-size:28px;font-weight:800;letter-spacing:-.02em;line-height:1;}
+  .tags{font-family:var(--mono);font-size:11.5px;color:var(--faint);padding-bottom:3px;}
+  .price-row{display:flex;align-items:baseline;gap:12px;}
+  .price{font-family:var(--mono);font-size:30px;font-weight:600;letter-spacing:-.01em;}
+  .chg{font-family:var(--mono);font-size:14px;font-weight:500;display:flex;align-items:center;gap:6px;}
+  .up{color:var(--up)} .down{color:var(--down)} .flat{color:var(--flat)}
+  .meta{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:11px;}
+  .meta b{color:var(--text);font-family:var(--mono);font-weight:500;}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--up);display:inline-block;margin-right:5px;
+       animation:pulse 2.4s infinite;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,91,98,.45)}70%{box-shadow:0 0 0 7px rgba(255,91,98,0)}100%{box-shadow:0 0 0 0 rgba(255,91,98,0)}}
+
+  section{margin-top:24px;opacity:0;transform:translateY(10px);animation:rise .5s ease forwards;}
+  section:nth-of-type(1){animation-delay:.05s}
+  section:nth-of-type(2){animation-delay:.13s}
+  section:nth-of-type(3){animation-delay:.21s}
+  @keyframes rise{to{opacity:1;transform:none}}
+  .sec-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px;}
+  .sec-head h2{font-size:15px;font-weight:700;letter-spacing:-.01em;}
+  .sec-head .hint{font-size:11px;color:var(--faint);}
+
+  /* Signals */
+  .signals{display:flex;flex-direction:column;gap:8px;}
+  .sig{display:flex;align-items:center;gap:11px;background:var(--panel);border:1px solid var(--line);
+       border-left:3px solid var(--info);border-radius:11px;padding:13px 15px;font-size:14px;font-weight:500;}
+  .sig.pos{border-left-color:var(--up);background:linear-gradient(90deg,var(--up-dim),transparent 60%)}
+  .sig.neg{border-left-color:var(--down);background:linear-gradient(90deg,var(--down-dim),transparent 60%)}
+  .sig.warn{border-left-color:var(--warn);background:linear-gradient(90deg,var(--warn-dim),transparent 60%)}
+  .sig.info{border-left-color:var(--info)}
+  .sig .ic{font-size:15px;flex-shrink:0;width:20px;text-align:center;}
+  .sig.pos .ic{color:var(--up)} .sig.neg .ic{color:var(--down)} .sig.warn .ic{color:var(--warn)} .sig.info .ic{color:var(--info)}
+
+  /* 투자자 매매동향 — 가로 스크롤 표 (일자열 고정) */
+  .unit-toggle{display:inline-flex;background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:2px;gap:2px;}
+  .unit-toggle button{font-size:11.5px;font-family:var(--sans);font-weight:600;color:var(--muted);background:transparent;
+    border:none;border-radius:999px;padding:4px 12px;cursor:pointer;transition:.15s;white-space:nowrap;}
+  .unit-toggle button.on{background:var(--text);color:var(--bg);}
+  .cap-line{font-size:11px;color:var(--faint);margin:0 2px 8px;}
+  .itbl-wrap{position:relative;}
+  .itbl-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:14px;-webkit-overflow-scrolling:touch;}
+  .itbl-scroll::-webkit-scrollbar{height:5px;}
+  .itbl-scroll::-webkit-scrollbar-thumb{background:var(--line-strong);border-radius:3px;}
+  .itbl-scroll::-webkit-scrollbar-track{background:transparent;}
+  .itbl{border-collapse:separate;border-spacing:0;width:max-content;min-width:100%;background:var(--panel);}
+  .itbl th,.itbl td{padding:9px 12px;font-size:12px;text-align:right;white-space:nowrap;border-bottom:1px solid var(--line);}
+  .itbl th{font-size:10.5px;color:var(--faint);font-weight:600;border-bottom:1px solid var(--line-strong);}
+  .itbl td{font-family:var(--mono);font-weight:500;}
+  .itbl tr:last-child td{border-bottom:none;}
+  .itbl th.l,.itbl td.l{position:sticky;left:0;text-align:left;background:var(--panel);
+    border-right:1px solid var(--line-strong);z-index:2;}
+  .itbl td.l{color:var(--muted);font-family:var(--sans);font-weight:600;}
+  .itbl .sep{border-left:2px solid var(--line-strong);}
+  .itbl .up{color:var(--up)} .itbl .down{color:var(--down)} .itbl .flat{color:var(--faint)}
+  .itbl-wrap::after{content:"";position:absolute;right:0;top:0;bottom:6px;width:26px;pointer-events:none;
+    background:linear-gradient(90deg,transparent,var(--bg));border-radius:0 14px 14px 0;transition:opacity .2s;}
+  .itbl-wrap.atend::after{opacity:0;}
+
+  /* 공매도 변화 카드 */
+  .chg-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px 16px;margin-bottom:11px;}
+  .chg-card .lab{font-size:11.5px;color:var(--muted);font-weight:600;}
+  .chg-card .row{display:flex;align-items:baseline;gap:11px;flex-wrap:wrap;margin-top:7px;}
+  .chg-card .qty{font-family:var(--mono);font-size:25px;font-weight:600;}
+  .chg-card .qty small{font-size:13px;color:var(--muted);font-weight:400;margin-left:2px;}
+  .chg-card .delta{font-family:var(--mono);font-size:13.5px;font-weight:600;padding:4px 11px;border-radius:999px;}
+  .chg-card .delta.inc{color:var(--warn);background:var(--warn-dim);}
+  .chg-card .delta.dec{color:var(--down);background:var(--down-dim);}
+  .chg-card .delta.flat{color:var(--flat);background:rgba(255,255,255,.05);}
+  .chg-card .sub{font-size:11.5px;color:var(--faint);margin-top:9px;}
+  .chg-card .pend{font-family:var(--sans);font-size:10px;font-weight:600;color:var(--warn);background:var(--warn-dim);
+    border:1px solid rgba(224,169,60,.4);border-radius:6px;padding:1px 7px;margin-left:7px;vertical-align:middle;white-space:nowrap;}
+  .chg-card .pend-note{margin-top:10px;font-size:11.5px;line-height:1.5;color:var(--warn);background:var(--warn-dim);
+    border:1px solid rgba(224,169,60,.3);border-radius:9px;padding:8px 11px;}
+
+  /* 공매도 표 */
+  .stbl{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;}
+  .stbl table{width:100%;border-collapse:collapse;}
+  .stbl th{font-size:11px;color:var(--faint);font-weight:600;text-align:right;padding:10px 14px;border-bottom:1px solid var(--line-strong);}
+  .stbl th.l{text-align:left}
+  .stbl td{padding:9px 14px;border-bottom:1px solid var(--line);font-size:12.5px;font-family:var(--mono);text-align:right;}
+  .stbl tr:last-child td{border-bottom:none}
+  .stbl td.l{text-align:left;color:var(--muted)}
+  .stbl tr.last td{background:rgba(255,91,98,.07)}
+  .stbl tr.last td.l{color:var(--text);font-weight:600}
+  .stbl .up{color:var(--up)} .stbl .down{color:var(--down)}
+
+  .empty{background:var(--panel);border:1px dashed var(--line-strong);border-radius:14px;padding:24px 16px;text-align:center;color:var(--faint);font-size:13px;}
+
+  footer{margin-top:32px;padding-top:18px;border-top:1px solid var(--line);font-size:11.5px;color:var(--faint);line-height:1.7;}
+  footer .src{color:var(--muted)}
+  .refresh{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-family:var(--mono);font-size:12px;color:var(--muted);
+           background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;}
+  .refresh svg{width:13px;height:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">Daily Stock Brief<span class="sample-badge" id="sampleBadge">예시 데이터 · 미배포</span></div>
+    <div class="name-row">
+      <h1 id="s-name">펩트론</h1>
+      <span class="tags" id="s-tags">087010 · KOSDAQ</span>
+    </div>
+    <div class="price-row">
+      <span class="price" id="s-price">—</span>
+      <span class="chg" id="s-chg">—</span>
+    </div>
+    <div class="meta">
+      <span><span class="dot"></span><b id="m-date">—</b> 종가 기준</span>
+      <span>갱신 <b id="m-updated">—</b></span>
+    </div>
+  </header>
+
+  <section>
+    <div class="sec-head"><h2>오늘의 특이점</h2><span class="hint">EOD 기준 신호</span></div>
+    <div class="signals" id="signals"></div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>투자자 매매동향</h2>
+      <div class="unit-toggle" id="unitToggle">
+        <button data-u="value" class="on">금액</button>
+        <button data-u="volume">수량</button>
+      </div>
+    </div>
+    <div id="invtbl"></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>공매도 잔고</h2><span class="hint">최근 10영업일 · T+2</span></div>
+    <div id="short"></div>
+  </section>
+
+  <footer>
+    <div class="src">출처 · 한국거래소(KRX) 정보데이터시스템</div>
+    데이터는 매 영업일 <b style="color:var(--muted)">2회 자동 갱신</b>됩니다 — 투자자 매매동향은 약 15:40, 공매도 잔고는 약 18:10경. 공매도 잔고는 결제일(T+2) 기준이라 2영업일 전 수치일 수 있습니다. 매매 특이점은 일별(EOD) 데이터로 산출한 참고용 신호이며 장중 실시간 흐름과 다를 수 있습니다. 정확성을 보장하지 않으며 투자 책임은 본인에게 있습니다.
+    <br>
+    <span class="refresh" onclick="location.reload()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 12a9 9 0 1 1-2.6-6.4M21 3v6h-6"/></svg>
+      최신 데이터 다시 받기
+    </span>
+    <div style="margin-top:8px;color:var(--faint);font-size:11px;">※ 이 버튼은 서버에 올라온 최신 데이터를 다시 불러올 뿐, 실시간으로 새로 수집하지 않습니다.</div>
+  </footer>
+</div>
+
+<script>
+const SAMPLE = {
+  updated_label:"2026.05.30 09:00 (참고)", trade_date:"2026.05.29",
+  stock:{name:"펩트론",ticker:"087010",market:"KOSDAQ",close:320000,change:32500,change_pct:11.30,
+         open:289000,high:332000,low:281000,volume:2840000,marketcap:6700000000000},
+  investors_hist:[
+    {date:"05.16", value:{"개인":120,"외국인":-40,"기관":-78,"금융투자":-50,"투신":-12,"사모":-8,"연기금":-5,"보험":-2,"은행":-1,"기타금융":0}},
+    {date:"05.19", value:{"개인":-30,"외국인":25,"기관":8,"금융투자":12,"투신":-3,"사모":2,"연기금":-1,"보험":-1,"은행":-1,"기타금융":0}},
+    {date:"05.20", value:{"개인":-65,"외국인":42,"기관":20,"금융투자":15,"투신":4,"사모":-2,"연기금":3,"보험":0,"은행":0,"기타금융":0}},
+    {date:"05.21", value:{"개인":-88,"외국인":55,"기관":30,"금융투자":18,"투신":6,"사모":1,"연기금":5,"보험":0,"은행":0,"기타금융":0}},
+    {date:"05.22", value:{"개인":-40,"외국인":30,"기관":12,"금융투자":9,"투신":2,"사모":-3,"연기금":4,"보험":0,"은행":0,"기타금융":0}},
+    {date:"05.23", value:{"개인":70,"외국인":-22,"기관":-46,"금융투자":-30,"투신":-8,"사모":-4,"연기금":-3,"보험":-1,"은행":0,"기타금융":0}},
+    {date:"05.26", value:{"개인":-25,"외국인":18,"기관":9,"금융투자":7,"투신":1,"사모":0,"연기금":1,"보험":0,"은행":0,"기타금융":0}},
+    {date:"05.27", value:{"개인":-90,"외국인":60,"기관":25,"금융투자":17,"투신":5,"사모":-1,"연기금":4,"보험":0,"은행":0,"기타금융":0}},
+    {date:"05.28", value:{"개인":-120,"외국인":150,"기관":40,"금융투자":28,"투신":7,"사모":-3,"연기금":11,"보험":1,"은행":-1,"기타금융":-3}},
+    {date:"05.29", value:{"개인":-305,"외국인":210,"기관":95,"금융투자":62,"투신":18,"사모":-7,"연기금":24,"보험":3,"은행":-2,"기타금융":-3}}
+  ],
+  short_latest:{date:"2026.05.27",qty:312450,ratio:2.84,qty_change:48200,qty_change_pct:18.25},
+  short_pending:true,
+  short_trend:[
+    {date:"05.14",qty:241000,ratio:2.21},{date:"05.15",qty:238500,ratio:2.18},
+    {date:"05.16",qty:250300,ratio:2.30},{date:"05.19",qty:255100,ratio:2.34},
+    {date:"05.20",qty:262800,ratio:2.41},{date:"05.21",qty:258900,ratio:2.38},
+    {date:"05.22",qty:271400,ratio:2.49},{date:"05.23",qty:264250,ratio:2.43},
+    {date:"05.26",qty:264250,ratio:2.43},{date:"05.27",qty:312450,ratio:2.84}
+  ],
+  signals:[
+    {kind:"warn",text:"거래량 급증 — 20일 평균 대비 3.4배"},
+    {kind:"warn",text:"장중 변동폭 확대 17.7%"},
+    {kind:"pos",text:"고가권 마감 — 매수 우위(짧은 윗꼬리)"},
+    {kind:"pos",text:"외국인·기관 동반 순매수 (+210억/+95억)"},
+    {kind:"info",text:"외국인 4일 연속 순매수"},
+    {kind:"warn",text:"공매도 잔고 급증 — 전일 대비 +48,200주"}
+  ]
+};
+
+let DATA = SAMPLE;
+let usingSample = true;
+const ICON = {pos:"▲",neg:"▼",warn:"!",info:"·"};
+const fmtInt = n => Math.round(n).toLocaleString('ko-KR');
+const dir = v => v>0?'up':(v<0?'down':'flat');
+function fmtEok(v){
+  const a=Math.abs(v), s=v>0?'+':(v<0?'-':'');
+  if(a>=10000) return s+(a/10000).toFixed(2).replace(/\.?0+$/,'')+'조';
+  return s+fmtInt(a)+'억';
+}
+function fmtVol(v){ return v>=1e8?(v/1e8).toFixed(1)+'억주':v>=1e4?fmtInt(v/1e4)+'만주':fmtInt(v)+'주'; }
+function fmtCap(won){
+  if(won==null) return '';
+  const eok=won/1e8;
+  if(eok>=10000) return (eok/10000).toFixed(2).replace(/\.?0+$/,'')+'조';
+  return fmtInt(eok)+'억';
+}
+function fmtShares(v){ // 순매수 수량(주), 부호 포함
+  const a=Math.abs(v), s=v>0?'+':(v<0?'-':'');
+  if(a>=10000) return s+(a/10000).toFixed(1).replace(/\.0$/,'')+'만';
+  return s+fmtInt(a);
+}
+// 샘플(금액만 있는 경우) 수량 근사 — 실 data.json엔 volume이 있어 덮어쓰지 않음
+function ensureVolume(){
+  const px=(DATA.stock||{}).close||0;
+  (DATA.investors_hist||[]).forEach(r=>{
+    if(!r.volume && r.value && px){
+      r.volume={}; for(const k in r.value) r.volume[k]=Math.round(r.value[k]*1e8/px);
+    }
+  });
+}
+
+function renderHeader(){
+  const s=DATA.stock||{};
+  document.getElementById('s-name').textContent=s.name||'—';
+  const cap = s.marketcap!=null ? ' · 시총 '+fmtCap(s.marketcap) : '';
+  document.getElementById('s-tags').textContent=`${s.ticker||''} · ${s.market||''}${cap}`;
+  document.getElementById('s-price').textContent=fmtInt(s.close||0);
+  const d=dir(s.change), ar=s.change>0?'▲':(s.change<0?'▼':'■');
+  const chg=document.getElementById('s-chg');
+  chg.className='chg '+d;
+  chg.innerHTML=`${ar} ${fmtInt(Math.abs(s.change||0))} (${s.change_pct>0?'+':''}${(s.change_pct||0).toFixed(2)}%)`;
+  document.getElementById('m-date').textContent=DATA.trade_date||'—';
+  document.getElementById('m-updated').textContent=DATA.updated_label||'—';
+}
+
+function renderSignals(){
+  const box=document.getElementById('signals');
+  const sg=DATA.signals||[];
+  if(!sg.length){ box.innerHTML='<div class="empty">오늘은 포착된 특이점이 없습니다</div>'; return; }
+  box.innerHTML=sg.map(s=>`<div class="sig ${s.kind}"><span class="ic">${ICON[s.kind]||'·'}</span><span>${s.text}</span></div>`).join('');
+}
+
+let invUnit='value';
+function renderInvestorTable(){
+  const h=DATA.investors_hist||[];
+  const box=document.getElementById('invtbl');
+  if(!h.length){ box.innerHTML='<div class="empty">집계 대기 중</div>'; return; }
+  const unit=invUnit;
+  const fmt=(unit==='value')?fmtEok:fmtShares;
+  const unitLabel=(unit==='value')?'억원':'주';
+  const cols=['개인','외국인','기관','금융투자','투신','사모','연기금','보험','은행','기타금융'];
+  const head='<th class="l">일자</th>'+cols.map(c=>`<th class="${c==='금융투자'?'sep':''}">${c}</th>`).join('');
+  const body=h.slice().reverse().map(r=>{
+    const row=r[unit]||{};
+    return '<tr><td class="l">'+r.date+'</td>'
+      +cols.map(c=>{
+        const v=row[c];
+        const has=(v!==undefined&&v!==null);
+        return `<td class="${has?dir(v):'flat'} ${c==='금융투자'?'sep':''}">${has?fmt(v):'—'}</td>`;
+      }).join('')+'</tr>';
+  }).join('');
+  box.innerHTML=`<div class="cap-line">최근 10영업일 · 단위 ${unitLabel} · 좌우 스크롤 →</div>`
+    +'<div class="itbl-wrap"><div class="itbl-scroll" id="itblScroll">'
+    +'<table class="itbl"><thead><tr>'+head+'</tr></thead><tbody>'+body+'</tbody></table></div></div>';
+
+  const wrap=box.querySelector('.itbl-wrap'), sc=box.querySelector('#itblScroll');
+  const upd=()=>wrap.classList.toggle('atend', sc.scrollLeft+sc.clientWidth>=sc.scrollWidth-4);
+  sc.addEventListener('scroll',upd,{passive:true}); upd();
+}
+
+function renderShort(){
+  const box=document.getElementById('short');
+  const L=DATA.short_latest, T=DATA.short_trend||[];
+  if(!L){ box.innerHTML='<div class="empty">집계 대기 중</div>'; return; }
+
+  const ch=L.qty_change||0, cd=ch>0?'inc':(ch<0?'dec':'flat');
+  const arr=ch>0?'▲':(ch<0?'▼':'—');
+  const word=ch>0?'증가':(ch<0?'감소':'변동 없음');
+  const delta = ch===0 ? `${arr} 변동 없음`
+    : `${arr} ${fmtInt(Math.abs(ch))}주 (${ch>0?'+':'-'}${Math.abs(L.qty_change_pct||0).toFixed(2)}%)`;
+  const pending = !!DATA.short_pending;
+  const pendBadge = pending ? '<span class="pend">오늘 업데이트 전</span>' : '';
+
+  let html=`<div class="chg-card">
+      <div class="lab">최근 잔고 수량 · ${L.date} 기준${pendBadge}</div>
+      <div class="row">
+        <span class="qty">${fmtInt(L.qty)}<small>주</small></span>
+        <span class="delta ${cd}">${delta}</span>
+      </div>
+      <div class="sub">전 영업일 대비 잔고 ${word} · 잔고비중 ${L.ratio!=null?L.ratio.toFixed(2)+'%':'—'}</div>
+      ${pending ? '<div class="pend-note">⏳ 오늘 최신 공매도 잔고는 아직 반영 전입니다 — 매 영업일 18:00~18:10 사이 갱신됩니다.</div>' : ''}
+    </div>`;
+
+  if(T.length){
+    html+='<div class="stbl"><table><thead><tr><th class="l">일자</th><th>잔고수량(주)</th><th>비중</th></tr></thead><tbody>'
+      +T.slice().reverse().map((t,i)=>`<tr class="${i===0?'last':''}">
+          <td class="l">${t.date}</td>
+          <td>${fmtInt(t.qty)}</td>
+          <td>${t.ratio.toFixed(2)}%</td></tr>`).join('')
+      +'</tbody></table></div>';
+  }
+  box.innerHTML=html;
+}
+
+function renderAll(){
+  document.getElementById('sampleBadge').style.display = usingSample ? 'inline-block' : 'none';
+  ensureVolume();
+  renderHeader(); renderSignals(); renderInvestorTable(); renderShort();
+}
+
+document.getElementById('unitToggle').addEventListener('click', e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  invUnit=b.dataset.u;
+  [...e.currentTarget.children].forEach(x=>x.classList.toggle('on', x===b));
+  renderInvestorTable();
+});
+
+fetch('data.json?t='+Date.now())
+  .then(r=>{ if(!r.ok) throw 0; return r.json(); })
+  .then(j=>{ DATA=j; usingSample=false; renderAll(); })
+  .catch(()=>{});
+renderAll();
+</script>
+</body>
+</html>
