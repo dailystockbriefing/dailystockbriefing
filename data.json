@@ -1,0 +1,27 @@
+{
+  "updated_label": "2026.05.30 14:10",
+  "trade_date": "2026.05.29",
+  "stock": {
+    "name": "펩트론",
+    "ticker": "087010",
+    "market": "KOSDAQ",
+    "close": 301000.0,
+    "change": -19000,
+    "change_pct": -5.94,
+    "open": 315000.0,
+    "high": 326500.0,
+    "low": 294000.0,
+    "volume": 340118,
+    "marketcap": null
+  },
+  "investors_hist": [],
+  "short_latest": null,
+  "short_trend": [],
+  "short_pending": true,
+  "signals": [
+    {
+      "kind": "neg",
+      "text": "저가권 마감 — 윗꼬리 형성(매도 압력)"
+    }
+  ]
+}
