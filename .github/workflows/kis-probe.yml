@@ -1,0 +1,21 @@
+name: kis-probe
+
+on:
+  workflow_dispatch:        # 수동 실행 버튼 전용
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      KIS_APPKEY: ${{ secrets.KIS_APPKEY }}
+      KIS_APPSECRET: ${{ secrets.KIS_APPSECRET }}
+      KIS_TR_ID: FHPTJ04040000     # 문서 상단 표의 '실전 TR ID'와 다르면 이 값을 수정
+      KIS_DATE: '20260529'
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: pip install requests
+      - run: python kis_probe.py
