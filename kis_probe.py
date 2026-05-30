@@ -10,7 +10,7 @@ import requests
 
 APPKEY    = os.environ["KIS_APPKEY"]
 APPSECRET = os.environ["KIS_APPSECRET"]
-TR_ID     = os.environ.get("KIS_TR_ID", "FHPTJ04040000")
+TR_ID     = os.environ.get("KIS_TR_ID", "FHPTJ04160001")
 DATE      = os.environ.get("KIS_DATE", "20260529")
 TICKER    = "087010"
 BASE      = "https://openapi.koreainvestment.com:9443"
@@ -32,7 +32,7 @@ headers = {
 }
 URL = f"{BASE}/uapi/domestic-stock/v1/quotations/investor-trade-by-stock-daily"
 
-for market in ("J", "UN", "NX"):
+for market in ("J", "U", "UN", "NX", "N"):
     params = {
         "FID_COND_MRKT_DIV_CODE": market,
         "FID_INPUT_ISCD": TICKER,
