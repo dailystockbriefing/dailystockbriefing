@@ -41,10 +41,12 @@
   .name-row{display:flex;align-items:flex-end;gap:10px;margin:7px 0 12px;}
   h1{font-size:28px;font-weight:800;letter-spacing:-.02em;line-height:1;}
   .tags{font-family:var(--mono);font-size:11.5px;color:var(--faint);padding-bottom:3px;}
-  .price-row{display:flex;align-items:baseline;gap:12px;}
+  .price-row{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;}
   .price{font-family:var(--mono);font-size:30px;font-weight:600;letter-spacing:-.01em;}
   .chg{font-family:var(--mono);font-size:14px;font-weight:500;display:flex;align-items:center;gap:6px;}
   .up{color:var(--up)} .down{color:var(--down)} .flat{color:var(--flat)}
+  .basis-badge{display:none;font-size:10.5px;font-family:var(--mono);font-weight:600;color:var(--gold);
+    background:rgba(217,176,106,.13);border:1px solid rgba(217,176,106,.4);border-radius:6px;padding:2px 8px;align-self:center;}
   .meta{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:11px;}
   .meta b{color:var(--text);font-family:var(--mono);font-weight:500;}
   .dot{width:7px;height:7px;border-radius:50%;background:var(--up);display:inline-block;margin-right:5px;
@@ -56,7 +58,7 @@
   section:nth-of-type(2){animation-delay:.13s}
   section:nth-of-type(3){animation-delay:.21s}
   @keyframes rise{to{opacity:1;transform:none}}
-  .sec-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px;}
+  .sec-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px;gap:10px;flex-wrap:wrap;}
   .sec-head h2{font-size:15px;font-weight:700;letter-spacing:-.01em;}
   .sec-head .hint{font-size:11px;color:var(--faint);}
 
@@ -72,10 +74,11 @@
   .sig.pos .ic{color:var(--up)} .sig.neg .ic{color:var(--down)} .sig.warn .ic{color:var(--warn)} .sig.info .ic{color:var(--info)}
 
   /* 투자자 매매동향 — 가로 스크롤 표 (일자열 고정) */
-  .unit-toggle{display:inline-flex;background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:2px;gap:2px;}
-  .unit-toggle button{font-size:11.5px;font-family:var(--sans);font-weight:600;color:var(--muted);background:transparent;
-    border:none;border-radius:999px;padding:4px 12px;cursor:pointer;transition:.15s;white-space:nowrap;}
-  .unit-toggle button.on{background:var(--text);color:var(--bg);}
+  .toggles{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end;}
+  .seg{display:inline-flex;background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:2px;gap:2px;}
+  .seg button{font-size:11.5px;font-family:var(--sans);font-weight:600;color:var(--muted);background:transparent;
+    border:none;border-radius:999px;padding:4px 11px;cursor:pointer;transition:.15s;white-space:nowrap;}
+  .seg button.on{background:var(--text);color:var(--bg);}
   .cap-line{font-size:11px;color:var(--faint);margin:0 2px 8px;}
   .itbl-wrap{position:relative;}
   .itbl-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:14px;-webkit-overflow-scrolling:touch;}
@@ -144,6 +147,7 @@
     <div class="price-row">
       <span class="price" id="s-price">—</span>
       <span class="chg" id="s-chg">—</span>
+      <span class="basis-badge" id="s-basis"></span>
     </div>
     <div class="meta">
       <span><span class="dot"></span><b id="m-date">—</b> 종가 기준</span>
@@ -159,9 +163,16 @@
   <section>
     <div class="sec-head">
       <h2>투자자 매매동향</h2>
-      <div class="unit-toggle" id="unitToggle">
-        <button data-u="value" class="on">금액</button>
-        <button data-u="volume">수량</button>
+      <div class="toggles">
+        <div class="seg" id="marketToggle">
+          <button data-m="UN" class="on">통합</button>
+          <button data-m="J">KRX</button>
+          <button data-m="NX">NXT</button>
+        </div>
+        <div class="seg" id="unitToggle">
+          <button data-u="value">금액</button>
+          <button data-u="volume" class="on">수량</button>
+        </div>
       </div>
     </div>
     <div id="invtbl"></div>
@@ -173,8 +184,8 @@
   </section>
 
   <footer>
-    <div class="src">출처 · 한국거래소(KRX) 정보데이터시스템</div>
-    데이터는 매 영업일 <b style="color:var(--muted)">2회 자동 갱신</b>됩니다 — 투자자 매매동향은 약 15:40, 공매도 잔고는 약 18:10경. 공매도 잔고는 결제일(T+2) 기준이라 2영업일 전 수치일 수 있습니다. 매매 특이점은 일별(EOD) 데이터로 산출한 참고용 신호이며 장중 실시간 흐름과 다를 수 있습니다. 정확성을 보장하지 않으며 투자 책임은 본인에게 있습니다.
+    <div class="src">출처 · 투자자 매매동향·시세: 한국투자증권(KIS) 통합(KRX+NXT) / 공매도 잔고·시가총액: 한국거래소(KRX)</div>
+    데이터는 매 영업일 <b style="color:var(--muted)">3회 자동 갱신</b>됩니다 — ①약 15:40 KRX 마감(통합 잠정), ②약 18:10 공매도 잔고, ③약 20:10 NXT 마감 후 통합 확정. 투자자 매매동향·시세는 통합(KRX+NXT) 기준이며, NXT 애프터마켓(~20:00)이 반영되는 ③ 이후가 그날 확정치입니다. 공매도 잔고는 결제일(T+2) 기준이라 2영업일 전 수치일 수 있습니다. 매매 특이점은 일별 데이터로 산출한 참고용 신호이며 장중 실시간 흐름과 다를 수 있습니다. 정확성을 보장하지 않으며 투자 책임은 본인에게 있습니다.
     <br>
     <span class="refresh" onclick="location.reload()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 12a9 9 0 1 1-2.6-6.4M21 3v6h-6"/></svg>
@@ -187,19 +198,60 @@
 <script>
 const SAMPLE = {
   updated_label:"2026.05.30 09:00 (참고)", trade_date:"2026.05.29",
-  stock:{name:"펩트론",ticker:"087010",market:"KOSDAQ",close:320000,change:32500,change_pct:11.30,
-         open:289000,high:332000,low:281000,volume:2840000,marketcap:6700000000000},
+  market_basis:"통합(KRX+NXT)",
+  stock:{name:"펩트론",ticker:"087010",market:"KOSDAQ",close:306000,change:18500,change_pct:6.44,
+         open:289000,high:332000,low:281000,volume:630278,marketcap:6700000000000},
   investors_hist:[
-    {date:"05.16", value:{"개인":120,"외국인":-40,"기관":-78,"금융투자":-50,"투신":-12,"사모":-8,"연기금":-5,"보험":-2,"은행":-1,"기타금융":0}},
-    {date:"05.19", value:{"개인":-30,"외국인":25,"기관":8,"금융투자":12,"투신":-3,"사모":2,"연기금":-1,"보험":-1,"은행":-1,"기타금융":0}},
-    {date:"05.20", value:{"개인":-65,"외국인":42,"기관":20,"금융투자":15,"투신":4,"사모":-2,"연기금":3,"보험":0,"은행":0,"기타금융":0}},
-    {date:"05.21", value:{"개인":-88,"외국인":55,"기관":30,"금융투자":18,"투신":6,"사모":1,"연기금":5,"보험":0,"은행":0,"기타금융":0}},
-    {date:"05.22", value:{"개인":-40,"외국인":30,"기관":12,"금융투자":9,"투신":2,"사모":-3,"연기금":4,"보험":0,"은행":0,"기타금융":0}},
-    {date:"05.23", value:{"개인":70,"외국인":-22,"기관":-46,"금융투자":-30,"투신":-8,"사모":-4,"연기금":-3,"보험":-1,"은행":0,"기타금융":0}},
-    {date:"05.26", value:{"개인":-25,"외국인":18,"기관":9,"금융투자":7,"투신":1,"사모":0,"연기금":1,"보험":0,"은행":0,"기타금융":0}},
-    {date:"05.27", value:{"개인":-90,"외국인":60,"기관":25,"금융투자":17,"투신":5,"사모":-1,"연기금":4,"보험":0,"은행":0,"기타금융":0}},
-    {date:"05.28", value:{"개인":-120,"외국인":150,"기관":40,"금융투자":28,"투신":7,"사모":-3,"연기금":11,"보험":1,"은행":-1,"기타금융":-3}},
-    {date:"05.29", value:{"개인":-305,"외국인":210,"기관":95,"금융투자":62,"투신":18,"사모":-7,"연기금":24,"보험":3,"은행":-2,"기타금융":-3}}
+    {date:"05.16", markets:{
+      UN:{value:{"개인":65,"외국인":-38,"기관":-22,"금융투자":-8,"투신":-7,"사모":0,"연기금":-1,"보험":-1,"은행":0}, volume:{"개인":21242,"외국인":-12418,"기관":-7190,"금융투자":-2614,"투신":-2288,"사모":0,"연기금":-327,"보험":-327,"은행":0}},
+      J:{value:{"개인":39,"외국인":-23,"기관":-13,"금융투자":-5,"투신":-4,"사모":0,"연기금":-1,"보험":-1,"은행":0}, volume:{"개인":12745,"외국인":-7516,"기관":-4248,"금융투자":-1634,"투신":-1307,"사모":0,"연기금":-327,"보험":-327,"은행":0}},
+      NX:{value:{"개인":26,"외국인":-15,"기관":-9,"금융투자":-3,"투신":-3,"사모":0,"연기금":0,"보험":0,"은행":0}, volume:{"개인":8497,"외국인":-4902,"기관":-2941,"금융투자":-980,"투신":-980,"사모":0,"연기금":0,"보험":0,"은행":0}}
+    }},
+    {date:"05.19", markets:{
+      UN:{value:{"개인":29,"외국인":29,"기관":-46,"금융투자":-29,"투신":-12,"사모":4,"연기금":-5,"보험":2,"은행":-1}, volume:{"개인":9477,"외국인":9477,"기관":-15033,"금융투자":-9477,"투신":-3922,"사모":1307,"연기금":-1634,"보험":654,"은행":-327}},
+      J:{value:{"개인":17,"외국인":17,"기관":-28,"금융투자":-17,"투신":-7,"사모":2,"연기금":-3,"보험":1,"은행":-1}, volume:{"개인":5556,"외국인":5556,"기관":-9150,"금융투자":-5556,"투신":-2288,"사모":654,"연기금":-980,"보험":327,"은행":-327}},
+      NX:{value:{"개인":12,"외국인":12,"기관":-18,"금융투자":-12,"투신":-5,"사모":2,"연기금":-2,"보험":1,"은행":0}, volume:{"개인":3922,"외국인":3922,"기관":-5882,"금융투자":-3922,"투신":-1634,"사모":654,"연기금":-654,"보험":327,"은행":0}}
+    }},
+    {date:"05.20", markets:{
+      UN:{value:{"개인":111,"외국인":-59,"기관":-37,"금융투자":-21,"투신":-10,"사모":-3,"연기금":-7,"보험":0,"은행":1}, volume:{"개인":36275,"외국인":-19281,"기관":-12092,"금융투자":-6863,"투신":-3268,"사모":-980,"연기금":-2288,"보험":0,"은행":327}},
+      J:{value:{"개인":67,"외국인":-35,"기관":-22,"금융투자":-13,"투신":-6,"사모":-2,"연기금":-4,"보험":0,"은행":1}, volume:{"개인":21895,"외국인":-11438,"기관":-7190,"금융투자":-4248,"투신":-1961,"사모":-654,"연기금":-1307,"보험":0,"은행":327}},
+      NX:{value:{"개인":44,"외국인":-24,"기관":-15,"금융투자":-8,"투신":-4,"사모":-1,"연기금":-3,"보험":0,"은행":0}, volume:{"개인":14379,"외국인":-7843,"기관":-4902,"금융투자":-2614,"투신":-1307,"사모":-327,"연기금":-980,"보험":0,"은행":0}}
+    }},
+    {date:"05.21", markets:{
+      UN:{value:{"개인":21,"외국인":40,"기관":-45,"금융투자":-23,"투신":-9,"사모":0,"연기금":-7,"보험":-1,"은행":1}, volume:{"개인":6863,"외국인":13072,"기관":-14706,"금융투자":-7516,"투신":-2941,"사모":0,"연기금":-2288,"보험":-327,"은행":327}},
+      J:{value:{"개인":13,"외국인":24,"기관":-27,"금융투자":-14,"투신":-5,"사모":0,"연기금":-4,"보험":-1,"은행":1}, volume:{"개인":4248,"외국인":7843,"기관":-8824,"금융투자":-4575,"투신":-1634,"사모":0,"연기금":-1307,"보험":-327,"은행":327}},
+      NX:{value:{"개인":8,"외국인":16,"기관":-18,"금융투자":-9,"투신":-4,"사모":0,"연기금":-3,"보험":0,"은행":0}, volume:{"개인":2614,"외국인":5229,"기관":-5882,"금융투자":-2941,"투신":-1307,"사모":0,"연기금":-980,"보험":0,"은행":0}}
+    }},
+    {date:"05.22", markets:{
+      UN:{value:{"개인":-75,"외국인":99,"기관":-26,"금융투자":-14,"투신":-7,"사모":-4,"연기금":-5,"보험":1,"은행":1}, volume:{"개인":-24510,"외국인":32353,"기관":-8497,"금융투자":-4575,"투신":-2288,"사모":-1307,"연기금":-1634,"보험":327,"은행":327}},
+      J:{value:{"개인":-45,"외국인":59,"기관":-16,"금융투자":-8,"투신":-4,"사모":-2,"연기금":-3,"보험":1,"은행":1}, volume:{"개인":-14706,"외국인":19281,"기관":-5229,"금융투자":-2614,"투신":-1307,"사모":-654,"연기금":-980,"보험":327,"은행":327}},
+      NX:{value:{"개인":-30,"외국인":40,"기관":-10,"금융투자":-6,"투신":-3,"사모":-2,"연기금":-2,"보험":0,"은행":0}, volume:{"개인":-9804,"외국인":13072,"기관":-3268,"금융투자":-1961,"투신":-980,"사모":-654,"연기금":-654,"보험":0,"은행":0}}
+    }},
+    {date:"05.23", markets:{
+      UN:{value:{"개인":-88,"외국인":88,"기관":-14,"금융투자":-4,"투신":-1,"사모":-10,"연기금":-3,"보험":1,"은행":-1}, volume:{"개인":-28758,"외국인":28758,"기관":-4575,"금융투자":-1307,"투신":-327,"사모":-3268,"연기금":-980,"보험":327,"은행":-327}},
+      J:{value:{"개인":-53,"외국인":53,"기관":-8,"금융투자":-2,"투신":-1,"사모":-6,"연기금":-2,"보험":1,"은행":-1}, volume:{"개인":-17320,"외국인":17320,"기관":-2614,"금융투자":-654,"투신":-327,"사모":-1961,"연기금":-654,"보험":327,"은행":-327}},
+      NX:{value:{"개인":-35,"외국인":35,"기관":-6,"금융투자":-2,"투신":0,"사모":-4,"연기금":-1,"보험":0,"은행":0}, volume:{"개인":-11438,"외국인":11438,"기관":-1961,"금융투자":-654,"투신":0,"사모":-1307,"연기금":-327,"보험":0,"은행":0}}
+    }},
+    {date:"05.26", markets:{
+      UN:{value:{"개인":40,"외국인":20,"기관":-44,"금융투자":-31,"투신":-7,"사모":0,"연기금":-5,"보험":2,"은행":0}, volume:{"개인":13072,"외국인":6536,"기관":-14379,"금융투자":-10131,"투신":-2288,"사모":0,"연기금":-1634,"보험":654,"은행":0}},
+      J:{value:{"개인":24,"외국인":12,"기관":-26,"금융투자":-19,"투신":-4,"사모":0,"연기금":-3,"보험":1,"은행":0}, volume:{"개인":7843,"외국인":3922,"기관":-8497,"금융투자":-6209,"투신":-1307,"사모":0,"연기금":-980,"보험":327,"은행":0}},
+      NX:{value:{"개인":16,"외국인":8,"기관":-18,"금융투자":-12,"투신":-3,"사모":0,"연기금":-2,"보험":1,"은행":0}, volume:{"개인":5229,"외국인":2614,"기관":-5882,"금융투자":-3922,"투신":-980,"사모":0,"연기금":-654,"보험":327,"은행":0}}
+    }},
+    {date:"05.27", markets:{
+      UN:{value:{"개인":-52,"외국인":-1,"기관":56,"금융투자":32,"투신":9,"사모":9,"연기금":11,"보험":0,"은행":-1}, volume:{"개인":-16993,"외국인":-327,"기관":18301,"금융투자":10458,"투신":2941,"사모":2941,"연기금":3595,"보험":0,"은행":-327}},
+      J:{value:{"개인":-31,"외국인":-1,"기관":34,"금융투자":19,"투신":5,"사모":5,"연기금":7,"보험":0,"은행":-1}, volume:{"개인":-10131,"외국인":-327,"기관":11111,"금융투자":6209,"투신":1634,"사모":1634,"연기금":2288,"보험":0,"은행":-327}},
+      NX:{value:{"개인":-21,"외국인":0,"기관":22,"금융투자":13,"투신":4,"사모":4,"연기금":4,"보험":0,"은행":0}, volume:{"개인":-6863,"외국인":0,"기관":7190,"금융투자":4248,"투신":1307,"사모":1307,"연기금":1307,"보험":0,"은행":0}}
+    }},
+    {date:"05.28", markets:{
+      UN:{value:{"개인":-120,"외국인":150,"기관":40,"금융투자":28,"투신":7,"사모":-3,"연기금":11,"보험":1,"은행":-1}, volume:{"개인":-38000,"외국인":47000,"기관":12500,"금융투자":8800,"투신":2200,"사모":-950,"연기금":3400,"보험":300,"은행":-300}},
+      J:{value:{"개인":-80,"외국인":95,"기관":28,"금융투자":20,"투신":5,"사모":-2,"연기금":7,"보험":1,"은행":-1}, volume:{"개인":-25000,"외국인":30000,"기관":8800,"금융투자":6300,"투신":1600,"사모":-650,"연기금":2200,"보험":200,"은행":-200}},
+      NX:{value:{"개인":-40,"외국인":55,"기관":12,"금융투자":8,"투신":2,"사모":-1,"연기금":4,"보험":0,"은행":0}, volume:{"개인":-13000,"외국인":17000,"기관":3700,"금융투자":2500,"투신":600,"사모":-300,"연기금":1200,"보험":0,"은행":0}}
+    }},
+    {date:"05.29", markets:{
+      UN:{value:{"개인":60,"외국인":-209,"기관":153,"금융투자":100,"투신":65,"사모":-18,"연기금":1,"보험":1,"은행":0}, volume:{"개인":19389,"외국인":-67008,"기관":48904,"금융투자":32951,"투신":21343,"사모":-5974,"연기금":315,"보험":269,"은행":0}},
+      J:{value:{"개인":8,"외국인":-154,"기관":150,"금융투자":99,"투신":65,"사모":-18,"연기금":1,"보험":1,"은행":0}, volume:{"개인":2911,"외국인":-49554,"기관":47883,"금융투자":31930,"투신":21343,"사모":-5974,"연기금":315,"보험":269,"은행":0}},
+      NX:{value:{"개인":52,"외국인":-55,"기관":3,"금융투자":3,"투신":0,"사모":0,"연기금":0,"보험":0,"은행":0}, volume:{"개인":16478,"외국인":-17454,"기관":1021,"금융투자":1021,"투신":0,"사모":0,"연기금":0,"보험":0,"은행":0}}
+    }}
   ],
   short_latest:{date:"2026.05.27",qty:312450,ratio:2.84,qty_change:48200,qty_change_pct:18.25},
   short_pending:true,
@@ -257,6 +309,8 @@ function renderHeader(){
   document.getElementById('s-name').textContent=s.name||'—';
   const cap = s.marketcap!=null ? ' · 시총 '+fmtCap(s.marketcap) : '';
   document.getElementById('s-tags').textContent=`${s.ticker||''} · ${s.market||''}${cap}`;
+  const basisEl=document.getElementById('s-basis');
+  if(basisEl){ basisEl.textContent = DATA.market_basis ? DATA.market_basis+' 기준' : ''; basisEl.style.display = DATA.market_basis?'inline-block':'none'; }
   document.getElementById('s-price').textContent=fmtInt(s.close||0);
   const d=dir(s.change), ar=s.change>0?'▲':(s.change<0?'▼':'■');
   const chg=document.getElementById('s-chg');
@@ -273,26 +327,29 @@ function renderSignals(){
   box.innerHTML=sg.map(s=>`<div class="sig ${s.kind}"><span class="ic">${ICON[s.kind]||'·'}</span><span>${s.text}</span></div>`).join('');
 }
 
-let invUnit='value';
+let invUnit='volume';
+let invMarket='UN';
+const MKT_NAME={UN:'통합(KRX+NXT)', J:'KRX', NX:'NXT'};
 function renderInvestorTable(){
   const h=DATA.investors_hist||[];
   const box=document.getElementById('invtbl');
   if(!h.length){ box.innerHTML='<div class="empty">집계 대기 중</div>'; return; }
-  const unit=invUnit;
+  const unit=invUnit, mk=invMarket;
   const fmt=(unit==='value')?fmtEok:fmtShares;
   const unitLabel=(unit==='value')?'억원':'주';
-  const cols=['개인','외국인','기관','금융투자','투신','사모','연기금','보험','은행','기타금융'];
+  const cols=['개인','외국인','기관','금융투자','투신','사모','연기금','보험','은행'];
   const head='<th class="l">일자</th>'+cols.map(c=>`<th class="${c==='금융투자'?'sep':''}">${c}</th>`).join('');
   const body=h.slice().reverse().map(r=>{
-    const row=r[unit]||{};
+    const mrow=(r.markets&&r.markets[mk])||null;
+    const row=(mrow&&mrow[unit])||null;
     return '<tr><td class="l">'+r.date+'</td>'
       +cols.map(c=>{
-        const v=row[c];
+        const v=row?row[c]:undefined;
         const has=(v!==undefined&&v!==null);
         return `<td class="${has?dir(v):'flat'} ${c==='금융투자'?'sep':''}">${has?fmt(v):'—'}</td>`;
       }).join('')+'</tr>';
   }).join('');
-  box.innerHTML=`<div class="cap-line">최근 10영업일 · 단위 ${unitLabel} · 좌우 스크롤 →</div>`
+  box.innerHTML=`<div class="cap-line">최근 ${h.length}영업일 · ${MKT_NAME[mk]} · 단위 ${unitLabel} · 좌우 스크롤 →</div>`
     +'<div class="itbl-wrap"><div class="itbl-scroll" id="itblScroll">'
     +'<table class="itbl"><thead><tr>'+head+'</tr></thead><tbody>'+body+'</tbody></table></div></div>';
 
@@ -337,13 +394,18 @@ function renderShort(){
 
 function renderAll(){
   document.getElementById('sampleBadge').style.display = usingSample ? 'inline-block' : 'none';
-  ensureVolume();
   renderHeader(); renderSignals(); renderInvestorTable(); renderShort();
 }
 
 document.getElementById('unitToggle').addEventListener('click', e=>{
   const b=e.target.closest('button'); if(!b) return;
   invUnit=b.dataset.u;
+  [...e.currentTarget.children].forEach(x=>x.classList.toggle('on', x===b));
+  renderInvestorTable();
+});
+document.getElementById('marketToggle').addEventListener('click', e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  invMarket=b.dataset.m;
   [...e.currentTarget.children].forEach(x=>x.classList.toggle('on', x===b));
   renderInvestorTable();
 });
