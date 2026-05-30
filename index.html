@@ -339,7 +339,7 @@ function renderInvestorTable(){
   const unitLabel=(unit==='value')?'억원':'주';
   const cols=['개인','외국인','기관','금융투자','투신','사모','연기금','보험','은행'];
   const head='<th class="l">일자</th>'+cols.map(c=>`<th class="${c==='금융투자'?'sep':''}">${c}</th>`).join('');
-  const body=h.slice().reverse().map(r=>{
+  const body=h.map(r=>{
     const mrow=(r.markets&&r.markets[mk])||null;
     const row=(mrow&&mrow[unit])||null;
     return '<tr><td class="l">'+r.date+'</td>'
