@@ -37,6 +37,15 @@ jobs:
           python-version: '3.12'
       - run: pip install pykrx pandas requests
 
+      # KIS 토큰(24h)을 실행 간 공유 — 발급 횟수를 하루 1회 수준으로 최소화
+      - name: Restore KIS token
+        uses: actions/cache@v4
+        with:
+          path: kis_token.json
+          key: kis-token-${{ github.run_id }}
+          restore-keys: |
+            kis-token-
+
       - name: Determine mode
         id: m
         run: |
