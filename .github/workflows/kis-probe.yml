@@ -10,7 +10,7 @@ jobs:
     env:
       KIS_APPKEY: ${{ secrets.KIS_APPKEY }}
       KIS_APPSECRET: ${{ secrets.KIS_APPSECRET }}
-      KIS_TR_ID: FHPTJ04040000     # 문서 상단 표의 '실전 TR ID'와 다르면 이 값을 수정
+      KIS_TR_ID: FHPTJ04160001     # 종목별 투자자매매동향(일별) 실전 TR ID
       KIS_DATE: '20260529'
     steps:
       - uses: actions/checkout@v6
