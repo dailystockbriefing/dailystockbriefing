@@ -1,12 +1,10 @@
 name: update-stock-brief
-
+ 
 on:
   schedule:
     # GitHub Actions cron 은 UTC. 평일(월~금).
-    # 09:30 UTC ≈ 15:30 KST  → 투자자 동향 창(15:37~15:40) 직전 시작
-    - cron: '30 6 * * 1-5'
-    # 08:57 UTC ≈ 17:57 KST  → 공매도 잔고 창(18:00~18:10) 직전 시작
-    - cron: '57 8 * * 1-5'
+    - cron: '30 6 * * 1-5'   # ~15:30 KST → 투자자 동향 창
+    - cron: '57 8 * * 1-5'   # ~17:57 KST → 공매도 잔고 창
   workflow_dispatch:
     inputs:
       mode:
@@ -14,25 +12,28 @@ on:
         default: 'invest'
         type: choice
         options: [invest, short]
-
+ 
 permissions:
   contents: write
-
+ 
 concurrency:
-  group: stock-brief        # 두 창이 겹쳐도 동시 실행 방지
+  group: stock-brief
   cancel-in-progress: false
-
+ 
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 20      # 안전장치 (폴링이 무한정 돌지 않도록)
+    timeout-minutes: 20
+    env:                                 # KRX 로그인 (회원제 전환 대응)
+      KRX_ID: ${{ secrets.KRX_ID }}
+      KRX_PW: ${{ secrets.KRX_PW }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
         with:
-          python-version: '3.11'
+          python-version: '3.12'
       - run: pip install pykrx pandas
-
+ 
       - name: Determine mode
         id: m
         run: |
@@ -40,7 +41,7 @@ jobs:
           elif [ "${{ github.event.schedule }}" = "57 8 * * 1-5" ]; then echo "mode=short"  >> "$GITHUB_OUTPUT"
           else echo "mode=${{ github.event.inputs.mode || 'invest' }}" >> "$GITHUB_OUTPUT"
           fi
-
+ 
       - name: Poll & collect
         run: |
           if [ "${{ steps.m.outputs.mode }}" = "short" ]; then
@@ -48,7 +49,7 @@ jobs:
           else
             python poll.py --mode invest --interval 30 --max-minutes 9
           fi
-
+ 
       - name: Commit data.json (변경분만)
         run: |
           git config user.name  "stock-bot"
@@ -60,3 +61,4 @@ jobs:
             git commit -m "data: ${{ steps.m.outputs.mode }} $(date -u +'%Y-%m-%d %H:%M UTC')"
             git push
           fi
+ 
