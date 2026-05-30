@@ -39,7 +39,8 @@ def _token():
     tok = r.get("access_token")
     if not tok:
         raise RuntimeError(f"KIS 토큰 발급 실패: {r}")
-    return tok, appkey, appsecret
+    expires_in = r.get("expires_in", 86400)
+    return tok, appkey, appsecret, expires_in
 
 
 def _to_int(v):
@@ -50,10 +51,40 @@ def _to_int(v):
 
 
 _TOKEN_CACHE = {}
+_TOKEN_FILE = "kis_token.json"   # 발급 토큰을 디스크에 저장해 24시간 재사용
+
+def _load_token_file():
+    try:
+        with open(_TOKEN_FILE, encoding="utf-8") as f:
+            d = json.load(f)
+        # 만료 1시간 전까지 유효한 것으로 간주
+        if d.get("expires_at", 0) - 3600 > time.time() and d.get("token"):
+            return (d["token"], d["appkey"], d["appsecret"])
+    except Exception:
+        pass
+    return None
+
+def _save_token_file(token, appkey, appsecret, expires_in):
+    try:
+        with open(_TOKEN_FILE, "w", encoding="utf-8") as f:
+            json.dump({"token": token, "appkey": appkey, "appsecret": appsecret,
+                       "expires_at": time.time() + int(expires_in)}, f)
+    except Exception as e:
+        print(f"[KIS] 토큰 저장 실패(무시): {e}")
 
 def _get_token_cached():
-    if "tok" not in _TOKEN_CACHE:
-        _TOKEN_CACHE["tok"] = _token()
+    # 1) 프로세스 메모리
+    if "tok" in _TOKEN_CACHE:
+        return _TOKEN_CACHE["tok"]
+    # 2) 디스크(24시간 유효) — 폴링/재실행 간 재사용으로 발급 횟수 최소화
+    disk = _load_token_file()
+    if disk:
+        _TOKEN_CACHE["tok"] = disk
+        return disk
+    # 3) 신규 발급 (하루 1회 수준으로만 발생)
+    tok, appkey, appsecret, expires_in = _token()
+    _save_token_file(tok, appkey, appsecret, expires_in)
+    _TOKEN_CACHE["tok"] = (tok, appkey, appsecret)
     return _TOKEN_CACHE["tok"]
 
 
