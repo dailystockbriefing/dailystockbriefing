@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.05.31 13:50",
+  "updated_label": "2026.05.31 13:56",
   "trade_date": "2026.05.29",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -958,10 +958,10 @@
     }
   ],
   "target_consensus": {
-    "avg": 2065172,
+    "avg": 2607000,
     "high": 3800000,
-    "low": 1100000,
-    "count": 58
+    "low": 1400000,
+    "count": 20
   },
   "signals": [
     {
@@ -971,10 +971,6 @@
     {
       "kind": "pos",
       "text": "최근 20일 신고가"
-    },
-    {
-      "kind": "neg",
-      "text": "현재가가 목표주가 평균(2,065,172원)을 12% 상회 (리포트 58건)"
     }
   ]
 }
