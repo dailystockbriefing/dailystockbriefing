@@ -8,6 +8,7 @@ collector.py 에서 import 해서 사용한다.
 output2: 최근 약 30영업일, 일자별 투자자 순매수(수량/금액) + OHLCV
 """
 import os
+import json
 import time
 import requests
 
