@@ -287,7 +287,7 @@ const SAMPLE = {
   ],
   short_latest:{date:"2026.05.27",qty:312450,ratio:2.84,qty_change:48200,qty_change_pct:18.25},
   short_pending:true,
-  target_consensus:{avg:385000,high:450000,low:320000,count:5},
+  target_consensus:{avg:385000,high:450000,low:320000,count:5,days:45},
   opinions:[
     {date:"05.28",broker:"미래에셋증권",opinion:"매수",prev_opinion:"매수",goal_price:450000,dprt:"-32.0"},
     {date:"05.27",broker:"삼성증권",opinion:"매수",prev_opinion:"중립",goal_price:420000,dprt:"-27.1"},
@@ -443,7 +443,7 @@ function renderTarget(){
     const up = px ? (con.avg-px)/px*100 : 0;
     const cls = up>=0?'pos':'neg';
     html+=`<div class="tgt-card">
-      <div class="lab">목표주가 컨센서스 (증권사 ${con.count}곳 · 최근 90일)</div>
+      <div class="lab">목표주가 컨센서스 (증권사 ${con.count}곳 · 최근 ${con.days||45}일)</div>
       <div class="row">
         <span class="avg">${fmtInt(con.avg)}<small>원</small></span>
         ${px?`<span class="up-badge ${cls}">현재가 대비 ${up>=0?'+':''}${up.toFixed(1)}%</span>`:''}
