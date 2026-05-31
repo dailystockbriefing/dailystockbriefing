@@ -169,8 +169,33 @@ def collect_all(short_pending=None):
     short_latest, short_trend = collect_short(date_str)
     marketcap = get_marketcap(date_str)
 
+    # 2-1) KIS: 증권사 투자의견/목표주가
+    try:
+        opinions = kis.fetch_opinions(TICKER)
+    except Exception as e:
+        print(f"[투자의견] 실패: {e}")
+        opinions = []
+    # 목표가 컨센서스 (최근 6개월 내 유효 목표가)
+    goals = [o["goal_price"] for o in opinions if o.get("goal_price")]
+    consensus = None
+    if goals:
+        consensus = {
+            "avg": round(sum(goals) / len(goals)),
+            "high": max(goals), "low": min(goals), "count": len(goals),
+        }
+
     # 3) 특이점 (통합 거래량 기준)
     signals = build_signals(base, short_latest)
+
+    # 목표주가 상승여력 신호
+    if consensus and today.get("close"):
+        upside = (consensus["avg"] - today["close"]) / today["close"] * 100
+        if upside >= 20:
+            signals.append({"kind": "pos",
+                "text": f"목표주가 컨센서스 평균 {consensus['avg']:,}원 — 현재가 대비 +{upside:.0f}% (리포트 {consensus['count']}건)"})
+        elif upside <= -10:
+            signals.append({"kind": "neg",
+                "text": f"현재가가 목표주가 평균({consensus['avg']:,}원)을 {abs(upside):.0f}% 상회 (리포트 {consensus['count']}건)"})
 
     if short_pending is None:
         before = (now.hour < 18) or (now.hour == 18 and now.minute < 10)
@@ -190,6 +215,8 @@ def collect_all(short_pending=None):
         "short_latest": short_latest,
         "short_trend": short_trend,
         "short_pending": bool(short_pending),
+        "opinions": opinions[:12],
+        "target_consensus": consensus,
         "signals": signals,
     }
     return data
