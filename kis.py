@@ -95,6 +95,28 @@ def _get_token_cached():
     return _TOKEN_CACHE["tok"]
 
 
+def _get_json(url, headers, params, tries=4):
+    """KIS GET — 초당 호출제한(rt_cd!=0, EGW00201 등) 시 백오프 재시도."""
+    last = None
+    for i in range(tries):
+        try:
+            r = requests.get(url, headers=headers, params=params, timeout=15).json()
+        except Exception as e:
+            last = {"rt_cd": "9", "msg1": str(e)}
+            time.sleep(0.6 * (i + 1))
+            continue
+        msg = str(r.get("msg1", ""))
+        if r.get("rt_cd") == "0":
+            return r
+        # 초당 거래건수 초과류 → 백오프 후 재시도
+        if "초당" in msg or "거래건수" in msg or r.get("msg_cd") in ("EGW00201", "EGW00133"):
+            time.sleep(0.7 * (i + 1))
+            last = r
+            continue
+        return r  # 그 외 오류는 그대로 반환
+    return last or {"rt_cd": "9", "msg1": "재시도 초과"}
+
+
 def fetch_daily(ticker, market="UN", base_date=""):
     """통합(UN) 일자별 투자자매매+시세. 최신→과거 정렬된 리스트 반환.
     각 원소: {date, close, change, change_pct, open, high, low, volume, value_won,
@@ -113,7 +135,7 @@ def fetch_daily(ticker, market="UN", base_date=""):
         "FID_ORG_ADJ_PRC": "1",
         "FID_ETC_CLS_CODE": "0",
     }
-    r = requests.get(URL, headers=headers, params=params, timeout=15).json()
+    r = _get_json(URL, headers, params)
     if r.get("rt_cd") != "0":
         raise RuntimeError(f"KIS 조회 실패({market}): {r.get('msg1')}")
 
@@ -155,7 +177,7 @@ def fetch_all_markets(ticker, token_bundle=None):
     for mk in ("UN", "J", "NX"):
         try:
             out[mk] = fetch_daily(ticker, market=mk)
-            time.sleep(0.3)
+            time.sleep(0.5)
         except Exception as e:
             print(f"[KIS] {mk} 수집 실패: {e}")
             out[mk] = []
@@ -178,7 +200,7 @@ def fetch_opinions(ticker, days=120):
     params = {"FID_COND_MRKT_DIV_CODE": "J", "FID_COND_SCR_DIV_CODE": "16633",
               "FID_INPUT_ISCD": ticker, "FID_INPUT_DATE_1": d1, "FID_INPUT_DATE_2": d2}
     try:
-        r = requests.get(_OPINION_URL, headers=headers, params=params, timeout=15).json()
+        r = _get_json(_OPINION_URL, headers, params)
     except Exception as e:
         print(f"[KIS] 투자의견 호출 실패: {e}")
         return []
