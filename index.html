@@ -443,7 +443,7 @@ function renderTarget(){
     const up = px ? (con.avg-px)/px*100 : 0;
     const cls = up>=0?'pos':'neg';
     html+=`<div class="tgt-card">
-      <div class="lab">목표주가 컨센서스 (리포트 ${con.count}건)</div>
+      <div class="lab">목표주가 컨센서스 (증권사 ${con.count}곳 · 최근 90일)</div>
       <div class="row">
         <span class="avg">${fmtInt(con.avg)}<small>원</small></span>
         ${px?`<span class="up-badge ${cls}">현재가 대비 ${up>=0?'+':''}${up.toFixed(1)}%</span>`:''}
