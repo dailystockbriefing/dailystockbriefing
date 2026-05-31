@@ -38,6 +38,10 @@
   .kicker{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);font-weight:600;}
   .sample-badge{display:none;margin-left:9px;font-size:10px;font-family:var(--mono);letter-spacing:.05em;
     color:var(--warn);background:var(--warn-dim);border:1px solid rgba(224,169,60,.45);border-radius:6px;padding:2px 7px;vertical-align:middle;}
+  .stock-select{margin-left:10px;font-family:var(--sans);font-size:12px;font-weight:600;color:var(--text);
+    background:var(--panel-2);border:1px solid var(--line-strong);border-radius:8px;padding:4px 9px;cursor:pointer;
+    vertical-align:middle;-webkit-appearance:none;appearance:none;}
+  .stock-select:focus{outline:none;border-color:var(--gold);}
   .name-row{display:flex;align-items:flex-end;gap:10px;margin:7px 0 12px;}
   h1{font-size:28px;font-weight:800;letter-spacing:-.02em;line-height:1;}
   .tags{font-family:var(--mono);font-size:11.5px;color:var(--faint);padding-bottom:3px;}
@@ -160,7 +164,9 @@
 <body>
 <div class="wrap">
   <header>
-    <div class="kicker">Daily Stock Brief<span class="sample-badge" id="sampleBadge">예시 데이터 · 미배포</span></div>
+    <div class="kicker">Daily Stock Brief<span class="sample-badge" id="sampleBadge">예시 데이터 · 미배포</span>
+      <select id="stockSelect" class="stock-select"></select>
+    </div>
     <div class="name-row">
       <h1 id="s-name">펩트론</h1>
       <span class="tags" id="s-tags">087010 · KOSDAQ</span>
@@ -484,10 +490,33 @@ document.getElementById('marketToggle').addEventListener('click', e=>{
   renderInvestorTable();
 });
 
-fetch('data.json?t='+Date.now())
+// ── 다종목 로드 ───────────────────────────────────────────
+const SAMPLE_INDEX = [
+  {ticker:"087010", name:"펩트론", market:"KOSDAQ"},
+  {ticker:"005930", name:"삼성전자", market:"KOSPI"},
+  {ticker:"000660", name:"SK하이닉스", market:"KOSPI"},
+];
+const sel = document.getElementById('stockSelect');
+
+function loadStock(ticker){
+  fetch(`data/${ticker}.json?t=`+Date.now())
+    .then(r=>{ if(!r.ok) throw 0; return r.json(); })
+    .then(j=>{ DATA=j; usingSample=false; renderAll(); })
+    .catch(()=>{ usingSample=true; renderAll(); });  // 파일 없으면 샘플 유지
+}
+
+function initStocks(list){
+  sel.innerHTML = list.map(s=>`<option value="${s.ticker}">${s.name} (${s.ticker})</option>`).join('');
+  sel.onchange = ()=>loadStock(sel.value);
+  loadStock(list[0].ticker);
+}
+
+// index.json 으로 종목 목록 구성 → 없으면 샘플 목록
+fetch('data/index.json?t='+Date.now())
   .then(r=>{ if(!r.ok) throw 0; return r.json(); })
-  .then(j=>{ DATA=j; usingSample=false; renderAll(); })
-  .catch(()=>{});
+  .then(j=>{ initStocks(j.stocks||SAMPLE_INDEX); })
+  .catch(()=>{ initStocks(SAMPLE_INDEX); renderAll(); });
+
 renderAll();
 </script>
 </body>

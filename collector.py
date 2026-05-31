@@ -14,10 +14,12 @@ import kis
 
 KST = timezone(timedelta(hours=9))
 
-# ── 대상 종목 ──────────────────────────────────────────────
-TICKER = "087010"
-NAME   = "펩트론"
-MARKET = "KOSDAQ"
+# ── 대상 종목 목록 ─────────────────────────────────────────
+STOCKS = [
+    {"ticker": "087010", "name": "펩트론",     "market": "KOSDAQ"},
+    {"ticker": "005930", "name": "삼성전자",   "market": "KOSPI"},
+    {"ticker": "000660", "name": "SK하이닉스", "market": "KOSPI"},
+]
 MKT_CODE = "UN"        # UN=통합(KRX+NXT)
 HIST_DAYS = 10
 # ───────────────────────────────────────────────────────────
@@ -35,9 +37,9 @@ def eok(won):
     return round(won / 1e8)
 
 
-def get_marketcap(date_str):
+def get_marketcap(ticker, date_str):
     try:
-        df = stock.get_market_cap_by_date(date_str, date_str, TICKER)
+        df = stock.get_market_cap_by_date(date_str, date_str, ticker)
         if df is not None and not df.empty:
             col = next((c for c in df.columns if "시가총액" in c), df.columns[0])
             return int(df[col].iloc[-1])
@@ -46,11 +48,11 @@ def get_marketcap(date_str):
     return None
 
 
-def collect_short(date_str):
+def collect_short(ticker, date_str):
     """KRX 일별 공매도 잔고 수량/비중 (T+2). 최근 10영업일 + 전일대비 수량 변화."""
     start = datetime.strptime(date_str, "%Y%m%d") - timedelta(days=50)
     try:
-        df = stock.get_shorting_balance_by_date(ymd(start), date_str, TICKER)
+        df = stock.get_shorting_balance_by_date(ymd(start), date_str, ticker)
     except Exception as e:
         print(f"[공매도] 실패: {e}")
         return None, []
@@ -134,11 +136,12 @@ def build_signals(rows, short_latest):
     return sig
 
 
-def collect_all(short_pending=None):
+def collect_all(stk, short_pending=None):
+    ticker, name, market = stk["ticker"], stk["name"], stk["market"]
     now = datetime.now(KST)
 
     # 1) KIS: 세 시장(통합/KRX/NXT) 투자자 + 시세
-    mkts = kis.fetch_all_markets(TICKER)
+    mkts = kis.fetch_all_markets(ticker)
     base = mkts.get("UN") or mkts.get("J")
     if not base:
         raise SystemExit("KIS 데이터를 가져오지 못했습니다.")
@@ -166,12 +169,12 @@ def collect_all(short_pending=None):
         })
 
     # 2) KRX: 공매도 + 시총
-    short_latest, short_trend = collect_short(date_str)
-    marketcap = get_marketcap(date_str)
+    short_latest, short_trend = collect_short(ticker, date_str)
+    marketcap = get_marketcap(ticker, date_str)
 
     # 2-1) KIS: 증권사 투자의견/목표주가
     try:
-        opinions = kis.fetch_opinions(TICKER)
+        opinions = kis.fetch_opinions(ticker)
     except Exception as e:
         print(f"[투자의견] 실패: {e}")
         opinions = []
@@ -206,7 +209,7 @@ def collect_all(short_pending=None):
         "trade_date": f"{date_str[:4]}.{date_str[4:6]}.{date_str[6:8]}" if len(date_str) == 8 else date_str,
         "market_basis": "통합(KRX+NXT)",
         "stock": {
-            "name": NAME, "ticker": TICKER, "market": MARKET,
+            "name": name, "ticker": ticker, "market": market,
             "close": today["close"], "change": today["change"], "change_pct": today["change_pct"],
             "open": today["open"], "high": today["high"], "low": today["low"],
             "volume": today["volume"], "marketcap": marketcap,
@@ -222,15 +225,36 @@ def collect_all(short_pending=None):
     return data
 
 
-def write_json(data, path="data.json"):
+def write_json(data, path):
+    import os
+    os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
 
+def collect_one(stk, short_pending=None):
+    """종목 1개 수집 → data/<ticker>.json 기록."""
+    data = collect_all(stk, short_pending=short_pending)
+    write_json(data, f"data/{stk['ticker']}.json")
+    print(f"  · {stk['name']}({stk['ticker']}) 기록 완료")
+    return data
+
+
+def write_index():
+    """종목 선택용 인덱스 → data/index.json"""
+    idx = [{"ticker": s["ticker"], "name": s["name"], "market": s["market"]} for s in STOCKS]
+    write_json({"stocks": idx, "updated_label": datetime.now(KST).strftime("%Y.%m.%d %H:%M")},
+               "data/index.json")
+
+
 def main():
-    data = collect_all()
-    write_json(data)
-    print(f"data.json 생성 완료 — {NAME}({TICKER}) {data['trade_date']} / 통합")
+    write_index()
+    for stk in STOCKS:
+        try:
+            collect_one(stk)
+        except Exception as e:
+            print(f"  ! {stk['name']}({stk['ticker']}) 실패: {e}")
+    print(f"data/*.json 생성 완료 — {len(STOCKS)}종목")
 
 
 if __name__ == "__main__":

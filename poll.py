@@ -1,16 +1,12 @@
 """
-신규 데이터 게시를 폴링하다가 감지되면 1회 수집해 data.json 으로 기록.
+신규 데이터 게시를 폴링하다 감지되면 전 종목을 수집해 data/<ticker>.json 기록.
+프로브는 대표종목(STOCKS[0])으로 게시 시점만 판단(시점은 종목 공통).
 
 3개 창 (KST):
-  - invest (~15:40): KRX 마감 직후. KIS 통합 데이터에 오늘자가 올라오기 시작.
-                     이 시점 통합값은 NXT 애프터마켓(~20:00) 미반영 '잠정'.
-  - short  (~18:00): KRX 공매도 잔고 갱신 (T+2).
-  - final  (~20:10): NXT 장 마감 후. 통합 데이터가 그날 '확정'.
-
-사용:
-  python poll.py --mode invest --interval 30 --max-minutes 9
-  python poll.py --mode short  --interval 60 --max-minutes 16
-  python poll.py --mode final  --interval 60 --max-minutes 20
+  - invest (약 15:40): KRX 마감 직후. 통합 데이터 잠정(NXT 미반영).
+  - short  (약 18:00): KRX 공매도 잔고 갱신.
+  - final  (약 20:10): NXT 마감 후 통합 확정.
+  - once             : 폴링 없이 즉시 1회(테스트용).
 """
 
 import argparse
@@ -30,34 +26,34 @@ def _today():
     return datetime.now(KST).strftime("%Y%m%d")
 
 
+def _rep():
+    """대표종목 (목록 첫 종목)"""
+    return C.STOCKS[0]
+
+
 def probe_invest():
-    """오늘자 KIS 통합 투자자 데이터가 게시됐는지 (KRX 마감 후 ~15:40)."""
     try:
-        rows = kis.fetch_daily(C.TICKER, market="UN")
-        if not rows:
+        rows = kis.fetch_daily(_rep()["ticker"], market="UN")
+        if not rows or rows[0].get("date_full") != _today():
             return False
-        top = rows[0]
-        if top.get("date_full") != _today():
-            return False
-        return any(v != 0 for v in top["value"].values())
+        return any(v != 0 for v in rows[0]["value"].values())
     except Exception:
         return False
 
 
 def stored_short_date():
     try:
-        with open("data.json", encoding="utf-8") as f:
+        with open(f"data/{_rep()['ticker']}.json", encoding="utf-8") as f:
             return (json.load(f).get("short_latest") or {}).get("date")
     except Exception:
         return None
 
 
 def probe_short():
-    """공매도 잔고 최신 기준일이 기존 data.json 보다 진전됐는지 (~18:00)."""
     now = datetime.now(KST)
     start = (now - timedelta(days=20)).strftime("%Y%m%d")
     try:
-        df = stock.get_shorting_balance_by_date(start, now.strftime("%Y%m%d"), C.TICKER)
+        df = stock.get_shorting_balance_by_date(start, now.strftime("%Y%m%d"), _rep()["ticker"])
         if df is None or df.empty:
             return False
         return df.index[-1].strftime("%Y.%m.%d") != stored_short_date()
@@ -66,32 +62,27 @@ def probe_short():
 
 
 def stored_un_volume():
-    """기존 data.json 최신행의 통합 거래량 합(투자자 절대값 합)으로 변화 감지용 지문."""
     try:
-        with open("data.json", encoding="utf-8") as f:
+        with open(f"data/{_rep()['ticker']}.json", encoding="utf-8") as f:
             h = json.load(f).get("investors_hist") or []
         if not h:
             return None
-        un = (h[-1].get("markets") or {}).get("UN") or {}
-        vol = un.get("volume") or {}
-        return sum(abs(v) for v in vol.values())
+        un = (h[0].get("markets") or {}).get("UN") or {}
+        return sum(abs(v) for v in (un.get("volume") or {}).values())
     except Exception:
         return None
 
 
 def probe_final():
-    """NXT 마감 후 통합 확정 여부 (~20:10).
-    NXT가 0이 아니거나, 통합 거래량 지문이 기존과 달라졌으면 '확정 갱신'으로 간주."""
     try:
-        un = kis.fetch_daily(C.TICKER, market="UN")
-        nx = kis.fetch_daily(C.TICKER, market="NX")
+        tk = _rep()["ticker"]
+        un = kis.fetch_daily(tk, market="UN")
+        nx = kis.fetch_daily(tk, market="NX")
         if not un or un[0].get("date_full") != _today():
             return False
-        # NXT 오늘자 순매수가 잡히면 애프터마켓 반영된 것
         if nx and nx[0].get("date_full") == _today():
             if any(v != 0 for v in nx[0]["value"].values()):
                 return True
-        # 또는 통합 거래량 지문이 기존 기록과 달라졌으면 갱신된 것
         cur = sum(abs(v) for v in un[0]["volume_inv"].values())
         prev = stored_un_volume()
         return (prev is None) or (cur != prev)
@@ -102,35 +93,41 @@ def probe_final():
 PROBES = {"invest": probe_invest, "short": probe_short, "final": probe_final}
 
 
+def collect_all_stocks(short_pending):
+    C.write_index()
+    for stk in C.STOCKS:
+        try:
+            C.collect_one(stk, short_pending=short_pending)
+        except Exception as e:
+            print(f"  ! {stk['name']}({stk['ticker']}) 실패: {e}")
+
+
 def run(mode, interval, max_minutes):
-    # once: 폴링 없이 즉시 1회 수집 (테스트/수동용)
     if mode == "once":
-        print("[once] 즉시 1회 수집")
-        C.write_json(C.collect_all())
-        print("[once] 수집·기록 완료")
+        print("[once] 즉시 전 종목 수집")
+        collect_all_stocks(short_pending=None)
+        print("[once] 완료")
         return 0
 
     probe = PROBES[mode]
     deadline = datetime.now(KST) + timedelta(minutes=max_minutes)
     n = 0
-    # 공매도 pending: short/final 창에서 감지되면 해제, invest 창에선 유지
+
     def write(detected):
-        pend = True
-        if mode in ("short", "final"):
-            pend = not detected
-        C.write_json(C.collect_all(short_pending=pend))
+        pend = True if mode == "invest" else (not detected)
+        collect_all_stocks(short_pending=pend)
 
     while datetime.now(KST) < deadline:
         n += 1
         if probe():
-            print(f"[{mode}] {n}회차 프로브 — 신규 감지, 수집 시작")
+            print(f"[{mode}] {n}회차 — 신규 감지, 전 종목 수집")
             write(True)
-            print(f"[{mode}] 수집·기록 완료")
+            print(f"[{mode}] 완료")
             return 0
-        print(f"[{mode}] {n}회차 프로브 — 아직 미게시, {interval}s 대기")
+        print(f"[{mode}] {n}회차 — 미게시, {interval}s 대기")
         time.sleep(interval)
 
-    print(f"[{mode}] 창 만료 — 최종 1회 수집")
+    print(f"[{mode}] 창 만료 — 최종 전 종목 수집")
     write(False)
     return 0
 
