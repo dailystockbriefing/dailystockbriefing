@@ -1,0 +1,20 @@
+{
+  "stocks": [
+    {
+      "ticker": "087010",
+      "name": "펩트론",
+      "market": "KOSDAQ"
+    },
+    {
+      "ticker": "005930",
+      "name": "삼성전자",
+      "market": "KOSPI"
+    },
+    {
+      "ticker": "000660",
+      "name": "SK하이닉스",
+      "market": "KOSPI"
+    }
+  ],
+  "updated_label": "2026.05.31 13:44"
+}
