@@ -40,6 +40,7 @@ def _token():
     if not tok:
         raise RuntimeError(f"KIS 토큰 발급 실패: {r}")
     expires_in = r.get("expires_in", 86400)
+    print(f"[KIS] 토큰 신규 발급 (expires_in={expires_in}초)")
     return tok, appkey, appsecret, expires_in
 
 
@@ -57,11 +58,16 @@ def _load_token_file():
     try:
         with open(_TOKEN_FILE, encoding="utf-8") as f:
             d = json.load(f)
-        # 만료 1시간 전까지 유효한 것으로 간주
-        if d.get("expires_at", 0) - 3600 > time.time() and d.get("token"):
+        remain = d.get("expires_at", 0) - time.time()
+        if remain - 3600 > 0 and d.get("token"):
+            print(f"[KIS] 저장된 토큰 재사용 (만료까지 {remain/3600:.1f}시간)")
             return (d["token"], d["appkey"], d["appsecret"])
-    except Exception:
-        pass
+        else:
+            print(f"[KIS] 저장된 토큰 만료/임박 (잔여 {remain/3600:.1f}시간) → 재발급 필요")
+    except FileNotFoundError:
+        print("[KIS] 토큰 파일 없음 → 신규 발급")
+    except Exception as e:
+        print(f"[KIS] 토큰 파일 읽기 실패({e}) → 신규 발급")
     return None
 
 def _save_token_file(token, appkey, appsecret, expires_in):
