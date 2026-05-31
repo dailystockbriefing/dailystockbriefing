@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.05.31 14:14",
+  "updated_label": "2026.05.31 14:44",
   "trade_date": "2026.05.29",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -910,63 +910,19 @@
       "prev_opinion": "Buy",
       "goal_price": 250000,
       "dprt": "-32.80"
-    },
-    {
-      "date": "04.14",
-      "date_full": "20260414",
-      "broker": "대신",
-      "opinion": "BUY",
-      "prev_opinion": "BUY",
-      "goal_price": 232000,
-      "dprt": "-17.03"
-    },
-    {
-      "date": "04.14",
-      "date_full": "20260414",
-      "broker": "한국투자",
-      "opinion": "매수",
-      "prev_opinion": "매수",
-      "goal_price": 230000,
-      "dprt": "-16.30"
-    },
-    {
-      "date": "04.09",
-      "date_full": "20260409",
-      "broker": "유안타",
-      "opinion": "BUY",
-      "prev_opinion": "BUY",
-      "goal_price": 236000,
-      "dprt": "-19.32"
-    },
-    {
-      "date": "04.08",
-      "date_full": "20260408",
-      "broker": "DB증권",
-      "opinion": "BUY",
-      "prev_opinion": "BUY",
-      "goal_price": 220000,
-      "dprt": "-15.32"
-    },
-    {
-      "date": "04.07",
-      "date_full": "20260407",
-      "broker": "SK",
-      "opinion": "매수",
-      "prev_opinion": "매수",
-      "goal_price": 230000,
-      "dprt": "-20.39"
     }
   ],
   "target_consensus": {
-    "avg": 224385,
+    "avg": 220143,
     "high": 250000,
     "low": 190000,
-    "count": 13
+    "count": 7,
+    "days": 45
   },
   "signals": [
     {
       "kind": "pos",
-      "text": "목표주가 컨센서스 평균 224,385원 — 현재가 대비 +33% (증권사 13곳)"
+      "text": "목표주가 컨센서스 평균 220,143원 — 현재가 대비 +31% (증권사 7곳)"
     }
   ]
 }

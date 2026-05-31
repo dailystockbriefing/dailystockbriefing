@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.05.31 14:14",
+  "updated_label": "2026.05.31 14:43",
   "trade_date": "2026.05.29",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -892,40 +892,14 @@
       "prev_opinion": "NotRated",
       "goal_price": 0,
       "dprt": "0.00"
-    },
-    {
-      "date": "04.23",
-      "date_full": "20260423",
-      "broker": "미래에셋",
-      "opinion": "NotRated",
-      "prev_opinion": "NotRated",
-      "goal_price": 0,
-      "dprt": "0.00"
-    },
-    {
-      "date": "04.20",
-      "date_full": "20260420",
-      "broker": "한국투자",
-      "opinion": "NotRated",
-      "prev_opinion": "NotRated",
-      "goal_price": 0,
-      "dprt": "0.00"
-    },
-    {
-      "date": "03.11",
-      "date_full": "20260311",
-      "broker": "삼성",
-      "opinion": "NotRated",
-      "prev_opinion": "NotRated",
-      "goal_price": 0,
-      "dprt": "0.00"
     }
   ],
   "target_consensus": {
     "avg": 145000,
     "high": 145000,
     "low": 145000,
-    "count": 1
+    "count": 1,
+    "days": 45
   },
   "signals": [
     {

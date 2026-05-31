@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.05.31 14:14",
+  "updated_label": "2026.05.31 14:43",
   "trade_date": "2026.05.29",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -892,76 +892,14 @@
       "prev_opinion": "BUY",
       "goal_price": 320000,
       "dprt": "-34.06"
-    },
-    {
-      "date": "04.15",
-      "date_full": "20260415",
-      "broker": "LS증권",
-      "opinion": "Buy",
-      "prev_opinion": "Buy",
-      "goal_price": 287000,
-      "dprt": "-29.79"
-    },
-    {
-      "date": "04.15",
-      "date_full": "20260415",
-      "broker": "삼성",
-      "opinion": "BUY",
-      "prev_opinion": "BUY",
-      "goal_price": 260000,
-      "dprt": "-22.50"
-    },
-    {
-      "date": "04.14",
-      "date_full": "20260414",
-      "broker": "신한투자증권",
-      "opinion": "매수",
-      "prev_opinion": "매수",
-      "goal_price": 240000,
-      "dprt": "-17.08"
-    },
-    {
-      "date": "04.09",
-      "date_full": "20260409",
-      "broker": "SK",
-      "opinion": "매수",
-      "prev_opinion": "매수",
-      "goal_price": 320000,
-      "dprt": "-37.03"
-    },
-    {
-      "date": "04.09",
-      "date_full": "20260409",
-      "broker": "유안타",
-      "opinion": "BUY",
-      "prev_opinion": "BUY",
-      "goal_price": 290000,
-      "dprt": "-30.52"
-    },
-    {
-      "date": "04.08",
-      "date_full": "20260408",
-      "broker": "다올투자",
-      "opinion": "BUY",
-      "prev_opinion": "BUY",
-      "goal_price": 300000,
-      "dprt": "-34.70"
-    },
-    {
-      "date": "04.06",
-      "date_full": "20260406",
-      "broker": "DB증권",
-      "opinion": "BUY",
-      "prev_opinion": "BUY",
-      "goal_price": 300000,
-      "dprt": "-34.17"
     }
   ],
   "target_consensus": {
-    "avg": 291933,
-    "high": 330000,
-    "low": 240000,
-    "count": 15
+    "avg": 283800,
+    "high": 320000,
+    "low": 250000,
+    "count": 5,
+    "days": 45
   },
   "signals": [
     {
@@ -983,10 +921,6 @@
     {
       "kind": "pos",
       "text": "외국인·기관 동반 순매수 (+923억/+2248억)"
-    },
-    {
-      "kind": "pos",
-      "text": "목표주가 컨센서스 평균 291,933원 — 현재가 대비 +22% (증권사 15곳)"
     }
   ]
 }

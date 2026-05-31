@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.05.31 14:14",
+  "updated_label": "2026.05.31 14:43",
   "trade_date": "2026.05.29",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -856,72 +856,8 @@
       "prev_opinion": "NotRated",
       "goal_price": 0,
       "dprt": "0.00"
-    },
-    {
-      "date": "04.01",
-      "date_full": "20260401",
-      "broker": "교보",
-      "opinion": "BUY",
-      "prev_opinion": "BUY",
-      "goal_price": 230000,
-      "dprt": "-16.52"
-    },
-    {
-      "date": "03.24",
-      "date_full": "20260324",
-      "broker": "신한투자증권",
-      "opinion": "NotRated",
-      "prev_opinion": "NotRated",
-      "goal_price": 0,
-      "dprt": "0.00"
-    },
-    {
-      "date": "03.17",
-      "date_full": "20260317",
-      "broker": "한국투자",
-      "opinion": "NotRated",
-      "prev_opinion": "NotRated",
-      "goal_price": 0,
-      "dprt": "0.00"
-    },
-    {
-      "date": "03.12",
-      "date_full": "20260312",
-      "broker": "삼성",
-      "opinion": "NotRated",
-      "prev_opinion": "NotRated",
-      "goal_price": 0,
-      "dprt": "0.00"
-    },
-    {
-      "date": "03.03",
-      "date_full": "20260303",
-      "broker": "다올투자",
-      "opinion": "BUY",
-      "prev_opinion": "BUY",
-      "goal_price": 240000,
-      "dprt": "-20.12"
-    },
-    {
-      "date": "02.10",
-      "date_full": "20260210",
-      "broker": "상상인",
-      "opinion": "BUY",
-      "prev_opinion": "BUY",
-      "goal_price": 230000,
-      "dprt": "-22.52"
     }
   ],
-  "target_consensus": {
-    "avg": 235000,
-    "high": 240000,
-    "low": 230000,
-    "count": 2
-  },
-  "signals": [
-    {
-      "kind": "pos",
-      "text": "목표주가 컨센서스 평균 235,000원 — 현재가 대비 +55% (증권사 2곳)"
-    }
-  ]
+  "target_consensus": null,
+  "signals": []
 }
