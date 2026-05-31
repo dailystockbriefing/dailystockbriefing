@@ -141,7 +141,7 @@
   .tgt-card .up-badge.pos{color:var(--up);background:var(--up-dim);}
   .tgt-card .up-badge.neg{color:var(--down);background:var(--down-dim);}
   .tgt-card .sub{font-size:11.5px;color:var(--faint);margin-top:9px;}
-  .op-list{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;}
+  .op-list{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow-y:auto;max-height:420px;}
   .op-row{display:flex;align-items:center;gap:10px;padding:12px 15px;border-bottom:1px solid var(--line);}
   .op-row:last-child{border-bottom:none;}
   .op-row .ob{flex:1;min-width:0;}
@@ -287,7 +287,7 @@ const SAMPLE = {
   ],
   short_latest:{date:"2026.05.27",qty:312450,ratio:2.84,qty_change:48200,qty_change_pct:18.25},
   short_pending:true,
-  target_consensus:{avg:385000,high:450000,low:320000,count:5,days:45},
+  target_consensus:{avg:385000,high:450000,low:320000,count:5,days:30},
   opinions:[
     {date:"05.28",broker:"미래에셋증권",opinion:"매수",prev_opinion:"매수",goal_price:450000,dprt:"-32.0"},
     {date:"05.27",broker:"삼성증권",opinion:"매수",prev_opinion:"중립",goal_price:420000,dprt:"-27.1"},
