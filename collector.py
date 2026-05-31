@@ -184,7 +184,7 @@ def collect_all(stk, short_pending=None):
         print(f"[투자의견] 실패: {e}")
         opinions = []
     # 목표가 컨센서스: 증권사별 '최신' 목표가 1개씩 + 최근 N일 이내만
-    CONSENSUS_DAYS = 45
+    CONSENSUS_DAYS = 30
     cutoff = (now - timedelta(days=CONSENSUS_DAYS)).strftime("%Y%m%d")
 
     def norm_broker(b):
@@ -229,8 +229,6 @@ def collect_all(stk, short_pending=None):
 
     print(f"  [컨센서스] {ticker}: {consensus['count'] if consensus else 0}곳 "
           f"평균 {consensus['avg'] if consensus else '—'}")
-    print(f"  [컨센서스상세] {ticker}: " +
-          " / ".join(f"{k}={v}" for k, v in latest_by_broker.items()))
 
     # 3) 특이점 (통합 거래량 기준)
     signals = build_signals(base, short_latest)
@@ -263,7 +261,7 @@ def collect_all(stk, short_pending=None):
         "short_latest": short_latest,
         "short_trend": short_trend,
         "short_pending": bool(short_pending),
-        "opinions": display_ops[:15],
+        "opinions": display_ops,
         "target_consensus": consensus,
         "signals": signals,
     }
