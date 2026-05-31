@@ -64,14 +64,15 @@ jobs:
             *)     python poll.py --mode invest --interval 30 --max-minutes 9  ;;
           esac
 
-      - name: Commit data.json (변경분만)
+      - name: Commit data (변경분만)
         run: |
           git config user.name  "stock-bot"
           git config user.email "actions@github.com"
-          git add data.json
+          git add data/
           if git diff --staged --quiet; then
             echo "변경 없음 — 커밋 생략"
           else
             git commit -m "data: ${{ steps.m.outputs.mode }} $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git pull --rebase --autostash || true
             git push
           fi
