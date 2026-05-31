@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.05.31 14:15",
+  "updated_label": "2026.05.31 14:32",
   "trade_date": "2026.05.29",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -921,15 +921,6 @@
       "dprt": "-43.16"
     },
     {
-      "date": "05.18",
-      "date_full": "20260518",
-      "broker": "미래에셋",
-      "opinion": "매수",
-      "prev_opinion": "매수",
-      "goal_price": 3200000,
-      "dprt": "-43.16"
-    },
-    {
       "date": "05.15",
       "date_full": "20260515",
       "broker": "하나증권",
@@ -939,15 +930,6 @@
       "dprt": "-28.36"
     },
     {
-      "date": "05.15",
-      "date_full": "20260515",
-      "broker": "KB",
-      "opinion": "BUY",
-      "prev_opinion": "BUY",
-      "goal_price": 3000000,
-      "dprt": "-34.33"
-    },
-    {
       "date": "05.13",
       "date_full": "20260513",
       "broker": "현대차",
@@ -955,13 +937,59 @@
       "prev_opinion": "BUY",
       "goal_price": 2650000,
       "dprt": "-30.75"
+    },
+    {
+      "date": "05.11",
+      "date_full": "20260511",
+      "broker": "LS증권",
+      "opinion": "Buy",
+      "prev_opinion": "Buy",
+      "goal_price": 2100000,
+      "dprt": "-19.71"
+    },
+    {
+      "date": "05.11",
+      "date_full": "20260511",
+      "broker": "키움",
+      "opinion": "Outperform",
+      "prev_opinion": "Outperform",
+      "goal_price": 1900000,
+      "dprt": "-11.26"
+    },
+    {
+      "date": "05.11",
+      "date_full": "20260511",
+      "broker": "대신",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 2500000,
+      "dprt": "-32.56"
+    },
+    {
+      "date": "05.07",
+      "date_full": "20260507",
+      "broker": "SK",
+      "opinion": "매수",
+      "prev_opinion": "매수",
+      "goal_price": 3000000,
+      "dprt": "-46.63"
+    },
+    {
+      "date": "04.24",
+      "date_full": "20260424",
+      "broker": "DB증권",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 1750000,
+      "dprt": "-30.00"
     }
   ],
   "target_consensus": {
     "avg": 2607000,
     "high": 3800000,
     "low": 1400000,
-    "count": 20
+    "count": 20,
+    "days": 45
   },
   "signals": [
     {
