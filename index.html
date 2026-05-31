@@ -127,6 +127,27 @@
   .stbl tr.last td.l{color:var(--text);font-weight:600}
   .stbl .up{color:var(--up)} .stbl .down{color:var(--down)}
 
+  /* 목표주가 */
+  .tgt-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px 16px;margin-bottom:11px;}
+  .tgt-card .lab{font-size:11.5px;color:var(--muted);font-weight:600;}
+  .tgt-card .row{display:flex;align-items:baseline;gap:11px;flex-wrap:wrap;margin-top:7px;}
+  .tgt-card .avg{font-family:var(--mono);font-size:25px;font-weight:600;}
+  .tgt-card .avg small{font-size:13px;color:var(--muted);font-weight:400;margin-left:2px;}
+  .tgt-card .up-badge{font-family:var(--mono);font-size:13px;font-weight:600;padding:4px 11px;border-radius:999px;}
+  .tgt-card .up-badge.pos{color:var(--up);background:var(--up-dim);}
+  .tgt-card .up-badge.neg{color:var(--down);background:var(--down-dim);}
+  .tgt-card .sub{font-size:11.5px;color:var(--faint);margin-top:9px;}
+  .op-list{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;}
+  .op-row{display:flex;align-items:center;gap:10px;padding:12px 15px;border-bottom:1px solid var(--line);}
+  .op-row:last-child{border-bottom:none;}
+  .op-row .ob{flex:1;min-width:0;}
+  .op-row .obroker{font-size:13px;font-weight:600;color:var(--text);}
+  .op-row .odate{font-family:var(--mono);font-size:11px;color:var(--faint);margin-left:7px;}
+  .op-row .oopin{font-size:11.5px;margin-top:2px;color:var(--muted);}
+  .op-row .chg-up{color:var(--up);font-weight:600;} .op-row .chg-dn{color:var(--down);font-weight:600;}
+  .op-row .ogoal{font-family:var(--mono);font-size:15px;font-weight:600;text-align:right;flex-shrink:0;}
+  .op-row .ogoal small{display:block;font-size:10.5px;color:var(--faint);font-weight:400;margin-top:1px;}
+
   .empty{background:var(--panel);border:1px dashed var(--line-strong);border-radius:14px;padding:24px 16px;text-align:center;color:var(--faint);font-size:13px;}
 
   footer{margin-top:32px;padding-top:18px;border-top:1px solid var(--line);font-size:11.5px;color:var(--faint);line-height:1.7;}
@@ -183,8 +204,13 @@
     <div id="short"></div>
   </section>
 
+  <section>
+    <div class="sec-head"><h2>증권사 목표주가</h2><span class="hint">최근 리포트 · KIS</span></div>
+    <div id="target"></div>
+  </section>
+
   <footer>
-    <div class="src">출처 · 투자자 매매동향·시세: 한국투자증권(KIS) 통합(KRX+NXT) / 공매도 잔고·시가총액: 한국거래소(KRX)</div>
+    <div class="src">출처 · 투자자 매매동향·시세·목표주가: 한국투자증권(KIS) / 공매도 잔고·시가총액: 한국거래소(KRX)</div>
     데이터는 매 영업일 <b style="color:var(--muted)">3회 자동 갱신</b>됩니다 — ①약 15:40 KRX 마감(통합 잠정), ②약 18:10 공매도 잔고, ③약 20:10 NXT 마감 후 통합 확정. 투자자 매매동향·시세는 통합(KRX+NXT) 기준이며, NXT 애프터마켓(~20:00)이 반영되는 ③ 이후가 그날 확정치입니다. 공매도 잔고는 결제일(T+2) 기준이라 2영업일 전 수치일 수 있습니다. 매매 특이점은 일별 데이터로 산출한 참고용 신호이며 장중 실시간 흐름과 다를 수 있습니다. 정확성을 보장하지 않으며 투자 책임은 본인에게 있습니다.
     <br>
     <span class="refresh" onclick="location.reload()">
@@ -255,6 +281,14 @@ const SAMPLE = {
   ],
   short_latest:{date:"2026.05.27",qty:312450,ratio:2.84,qty_change:48200,qty_change_pct:18.25},
   short_pending:true,
+  target_consensus:{avg:385000,high:450000,low:320000,count:5},
+  opinions:[
+    {date:"05.28",broker:"미래에셋증권",opinion:"매수",prev_opinion:"매수",goal_price:450000,dprt:"-32.0"},
+    {date:"05.27",broker:"삼성증권",opinion:"매수",prev_opinion:"중립",goal_price:420000,dprt:"-27.1"},
+    {date:"05.21",broker:"한국투자증권",opinion:"매수",prev_opinion:"매수",goal_price:380000,dprt:"-19.5"},
+    {date:"05.19",broker:"키움증권",opinion:"매수",prev_opinion:"매수",goal_price:355000,dprt:"-13.8"},
+    {date:"05.14",broker:"NH투자증권",opinion:"중립",prev_opinion:"매수",goal_price:320000,dprt:"-4.4"}
+  ],
   short_trend:[
     {date:"05.14",qty:241000,ratio:2.21},{date:"05.15",qty:238500,ratio:2.18},
     {date:"05.16",qty:250300,ratio:2.30},{date:"05.19",qty:255100,ratio:2.34},
@@ -392,9 +426,49 @@ function renderShort(){
   box.innerHTML=html;
 }
 
+function renderTarget(){
+  const box=document.getElementById('target');
+  const ops=DATA.opinions||[];
+  const con=DATA.target_consensus;
+  const px=(DATA.stock||{}).close||0;
+  if(!ops.length && !con){ box.innerHTML='<div class="empty">최근 등록된 리포트가 없습니다</div>'; return; }
+  let html='';
+  if(con){
+    const up = px ? (con.avg-px)/px*100 : 0;
+    const cls = up>=0?'pos':'neg';
+    html+=`<div class="tgt-card">
+      <div class="lab">목표주가 컨센서스 (리포트 ${con.count}건)</div>
+      <div class="row">
+        <span class="avg">${fmtInt(con.avg)}<small>원</small></span>
+        ${px?`<span class="up-badge ${cls}">현재가 대비 ${up>=0?'+':''}${up.toFixed(1)}%</span>`:''}
+      </div>
+      <div class="sub">최고 ${fmtInt(con.high)} · 최저 ${fmtInt(con.low)}</div>
+    </div>`;
+  }
+  if(ops.length){
+    html+='<div class="op-list">'+ops.map(o=>{
+      // 의견 변화: 직전과 다르면 상향/하향 표시
+      let chg='';
+      if(o.prev_opinion && o.opinion && o.prev_opinion!==o.opinion){
+        const upWords=['매수','Buy','적극매수','강력매수'];
+        const isUp = upWords.some(w=>o.opinion.includes(w)) && !upWords.some(w=>o.prev_opinion.includes(w));
+        chg = ` · <span class="${isUp?'chg-up':'chg-dn'}">${o.prev_opinion}→${o.opinion}</span>`;
+      }
+      return `<div class="op-row">
+        <div class="ob">
+          <div><span class="obroker">${o.broker||'—'}</span><span class="odate">${o.date}</span></div>
+          <div class="oopin">의견 ${o.opinion||'—'}${chg}</div>
+        </div>
+        <div class="ogoal">${o.goal_price?fmtInt(o.goal_price)+'원':'—'}</div>
+      </div>`;
+    }).join('')+'</div>';
+  }
+  box.innerHTML=html;
+}
+
 function renderAll(){
   document.getElementById('sampleBadge').style.display = usingSample ? 'inline-block' : 'none';
-  renderHeader(); renderSignals(); renderInvestorTable(); renderShort();
+  renderHeader(); renderSignals(); renderInvestorTable(); renderShort(); renderTarget();
 }
 
 document.getElementById('unitToggle').addEventListener('click', e=>{
