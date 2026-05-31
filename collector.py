@@ -178,26 +178,49 @@ def collect_all(stk, short_pending=None):
     except Exception as e:
         print(f"[투자의견] 실패: {e}")
         opinions = []
-    # 목표가 컨센서스: 증권사별 '최신' 목표가 1개씩 + 최근 90일 이내만
-    cutoff = (now - timedelta(days=90)).strftime("%Y%m%d")
-    latest_by_broker = {}   # 증권사 → 최신 목표가 (opinions는 최신순)
+    # 목표가 컨센서스: 증권사별 '최신' 목표가 1개씩 + 최근 N일 이내만
+    CONSENSUS_DAYS = 45
+    cutoff = (now - timedelta(days=CONSENSUS_DAYS)).strftime("%Y%m%d")
+
+    def norm_broker(b):
+        """증권사명 정규화 — 표기 차이로 중복 집계되는 것 방지."""
+        b = (b or "").strip()
+        for suf in ("투자증권", "증권", "투자", "금융투자"):
+            if b.endswith(suf):
+                b = b[:-len(suf)]
+        return b.strip()
+
+    latest_by_broker = {}   # 정규화 증권사 → 최신 목표가 (opinions는 최신순)
     for o in opinions:
         gp = o.get("goal_price")
-        broker = o.get("broker") or ""
         df = o.get("date_full", "")
         if not gp or gp <= 0:
             continue
-        if df and df < cutoff:      # 90일보다 오래된 리포트 제외
+        if df and df < cutoff:      # N일보다 오래된 리포트 제외
             continue
-        if broker not in latest_by_broker:   # 증권사별 첫 등장 = 최신
-            latest_by_broker[broker] = gp
+        key = norm_broker(o.get("broker"))
+        if key and key not in latest_by_broker:   # 증권사별 첫 등장 = 최신
+            latest_by_broker[key] = gp
     goals = list(latest_by_broker.values())
     consensus = None
     if goals:
         consensus = {
             "avg": round(sum(goals) / len(goals)),
             "high": max(goals), "low": min(goals), "count": len(goals),
+            "days": CONSENSUS_DAYS,
         }
+    # 표시용: 컨센서스와 동일 기준(증권사별 최신·기간내) 리포트만, 최신순
+    seen = set()
+    display_ops = []
+    for o in opinions:
+        df = o.get("date_full", "")
+        if df and df < cutoff:
+            continue
+        key = norm_broker(o.get("broker"))
+        if not key or key in seen:
+            continue
+        seen.add(key)
+        display_ops.append(o)
 
     # 3) 특이점 (통합 거래량 기준)
     signals = build_signals(base, short_latest)
@@ -230,7 +253,7 @@ def collect_all(stk, short_pending=None):
         "short_latest": short_latest,
         "short_trend": short_trend,
         "short_pending": bool(short_pending),
-        "opinions": opinions[:12],
+        "opinions": display_ops[:15],
         "target_consensus": consensus,
         "signals": signals,
     }
