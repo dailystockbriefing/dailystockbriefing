@@ -178,8 +178,20 @@ def collect_all(stk, short_pending=None):
     except Exception as e:
         print(f"[투자의견] 실패: {e}")
         opinions = []
-    # 목표가 컨센서스 (최근 6개월 내 유효 목표가)
-    goals = [o["goal_price"] for o in opinions if o.get("goal_price")]
+    # 목표가 컨센서스: 증권사별 '최신' 목표가 1개씩 + 최근 90일 이내만
+    cutoff = (now - timedelta(days=90)).strftime("%Y%m%d")
+    latest_by_broker = {}   # 증권사 → 최신 목표가 (opinions는 최신순)
+    for o in opinions:
+        gp = o.get("goal_price")
+        broker = o.get("broker") or ""
+        df = o.get("date_full", "")
+        if not gp or gp <= 0:
+            continue
+        if df and df < cutoff:      # 90일보다 오래된 리포트 제외
+            continue
+        if broker not in latest_by_broker:   # 증권사별 첫 등장 = 최신
+            latest_by_broker[broker] = gp
+    goals = list(latest_by_broker.values())
     consensus = None
     if goals:
         consensus = {
@@ -195,10 +207,10 @@ def collect_all(stk, short_pending=None):
         upside = (consensus["avg"] - today["close"]) / today["close"] * 100
         if upside >= 20:
             signals.append({"kind": "pos",
-                "text": f"목표주가 컨센서스 평균 {consensus['avg']:,}원 — 현재가 대비 +{upside:.0f}% (리포트 {consensus['count']}건)"})
+                "text": f"목표주가 컨센서스 평균 {consensus['avg']:,}원 — 현재가 대비 +{upside:.0f}% (증권사 {consensus['count']}곳)"})
         elif upside <= -10:
             signals.append({"kind": "neg",
-                "text": f"현재가가 목표주가 평균({consensus['avg']:,}원)을 {abs(upside):.0f}% 상회 (리포트 {consensus['count']}건)"})
+                "text": f"현재가가 목표주가 평균({consensus['avg']:,}원)을 {abs(upside):.0f}% 상회 (증권사 {consensus['count']}곳)"})
 
     if short_pending is None:
         before = (now.hour < 18) or (now.hour == 18 and now.minute < 10)
