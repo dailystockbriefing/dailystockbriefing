@@ -103,6 +103,13 @@ PROBES = {"invest": probe_invest, "short": probe_short, "final": probe_final}
 
 
 def run(mode, interval, max_minutes):
+    # once: 폴링 없이 즉시 1회 수집 (테스트/수동용)
+    if mode == "once":
+        print("[once] 즉시 1회 수집")
+        C.write_json(C.collect_all())
+        print("[once] 수집·기록 완료")
+        return 0
+
     probe = PROBES[mode]
     deadline = datetime.now(KST) + timedelta(minutes=max_minutes)
     n = 0
@@ -130,7 +137,7 @@ def run(mode, interval, max_minutes):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--mode", choices=["invest", "short", "final"], required=True)
+    ap.add_argument("--mode", choices=["invest", "short", "final", "once"], required=True)
     ap.add_argument("--interval", type=int, default=30)
     ap.add_argument("--max-minutes", type=int, default=10)
     args = ap.parse_args()
