@@ -153,3 +153,43 @@ def fetch_all_markets(ticker, token_bundle=None):
             print(f"[KIS] {mk} 수집 실패: {e}")
             out[mk] = []
     return out
+
+
+_OPINION_URL = f"{BASE}/uapi/domestic-stock/v1/quotations/invest-opinion"
+_OPINION_TR = "FHKST663300C0"
+
+def fetch_opinions(ticker, days=120):
+    """국내주식 종목투자의견 — 최근 days일. 날짜형식은 '00'+YYYYMMDD(10자리).
+    반환: 최신순 리스트 [{date, broker, opinion, prev_opinion, goal_price, dprt}]
+    """
+    from datetime import datetime, timedelta
+    token, appkey, appsecret = _get_token_cached()
+    d2 = "00" + datetime.now().strftime("%Y%m%d")
+    d1 = "00" + (datetime.now() - timedelta(days=days)).strftime("%Y%m%d")
+    headers = {"authorization": f"Bearer {token}", "appkey": appkey, "appsecret": appsecret,
+               "tr_id": _OPINION_TR, "custtype": "P"}
+    params = {"FID_COND_MRKT_DIV_CODE": "J", "FID_COND_SCR_DIV_CODE": "16633",
+              "FID_INPUT_ISCD": ticker, "FID_INPUT_DATE_1": d1, "FID_INPUT_DATE_2": d2}
+    try:
+        r = requests.get(_OPINION_URL, headers=headers, params=params, timeout=15).json()
+    except Exception as e:
+        print(f"[KIS] 투자의견 호출 실패: {e}")
+        return []
+    if r.get("rt_cd") != "0":
+        print(f"[KIS] 투자의견 응답: {r.get('msg1')}")
+        return []
+    rows = []
+    for o in (r.get("output", []) or []):
+        d8 = o.get("stck_bsop_date", "")
+        rows.append({
+            "date": f"{d8[4:6]}.{d8[6:8]}" if len(d8) == 8 else d8,
+            "date_full": d8,
+            "broker": o.get("mbcr_name", "").strip(),
+            "opinion": o.get("invt_opnn", "").strip(),
+            "prev_opinion": o.get("rgbf_invt_opnn", "").strip(),
+            "goal_price": _to_int(o.get("hts_goal_prc")),
+            "dprt": o.get("nday_dprt", "") or o.get("dprt", ""),
+        })
+    # 최신순 정렬 (날짜 내림차순)
+    rows.sort(key=lambda x: x["date_full"], reverse=True)
+    return rows
