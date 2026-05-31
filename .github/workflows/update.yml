@@ -10,9 +10,9 @@ on:
     inputs:
       mode:
         description: '수동 실행 모드'
-        default: 'invest'
+        default: 'once'
         type: choice
-        options: [invest, short, final]
+        options: [once, invest, short, final]
 
 permissions:
   contents: write
@@ -58,6 +58,7 @@ jobs:
       - name: Poll & collect
         run: |
           case "${{ steps.m.outputs.mode }}" in
+            once)  python poll.py --mode once ;;
             short) python poll.py --mode short  --interval 60 --max-minutes 16 ;;
             final) python poll.py --mode final  --interval 60 --max-minutes 20 ;;
             *)     python poll.py --mode invest --interval 30 --max-minutes 9  ;;
