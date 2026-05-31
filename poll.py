@@ -100,6 +100,7 @@ def collect_all_stocks(short_pending):
             C.collect_one(stk, short_pending=short_pending)
         except Exception as e:
             print(f"  ! {stk['name']}({stk['ticker']}) 실패: {e}")
+        time.sleep(1.0)   # 종목 간 간격 — KIS 초당 호출제한 회피
 
 
 def run(mode, interval, max_minutes):
