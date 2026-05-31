@@ -227,6 +227,9 @@ def collect_all(stk, short_pending=None):
         seen.add(key)
         display_ops.append(o)
 
+    print(f"  [컨센서스] {ticker}: {consensus['count'] if consensus else 0}곳 "
+          f"평균 {consensus['avg'] if consensus else '—'}")
+
     # 3) 특이점 (통합 거래량 기준)
     signals = build_signals(base, short_latest)
 
