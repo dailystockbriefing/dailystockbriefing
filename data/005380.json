@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.05.31 15:15",
+  "updated_label": "2026.05.31 15:34",
   "trade_date": "2026.05.29",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -928,32 +928,14 @@
       "prev_opinion": "BUY",
       "goal_price": 950000,
       "dprt": "-26.32"
-    },
-    {
-      "date": "04.24",
-      "date_full": "20260424",
-      "broker": "교보",
-      "opinion": "BUY",
-      "prev_opinion": "BUY",
-      "goal_price": 800000,
-      "dprt": "-33.50"
-    },
-    {
-      "date": "04.21",
-      "date_full": "20260421",
-      "broker": "유진투자",
-      "opinion": "BUY",
-      "prev_opinion": "BUY",
-      "goal_price": 1000000,
-      "dprt": "-47.30"
     }
   ],
   "target_consensus": {
-    "avg": 891818,
+    "avg": 890000,
     "high": 1200000,
     "low": 750000,
-    "count": 11,
-    "days": 45
+    "count": 9,
+    "days": 30
   },
   "signals": [
     {
@@ -970,7 +952,7 @@
     },
     {
       "kind": "pos",
-      "text": "목표주가 컨센서스 평균 891,818원 — 현재가 대비 +22% (증권사 11곳)"
+      "text": "목표주가 컨센서스 평균 890,000원 — 현재가 대비 +21% (증권사 9곳)"
     }
   ]
 }

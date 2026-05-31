@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.05.31 15:15",
+  "updated_label": "2026.05.31 15:33",
   "trade_date": "2026.05.29",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -901,28 +901,19 @@
       "prev_opinion": "BUY",
       "goal_price": 210000,
       "dprt": "-15.90"
-    },
-    {
-      "date": "04.29",
-      "date_full": "20260429",
-      "broker": "LS증권",
-      "opinion": "Buy",
-      "prev_opinion": "Buy",
-      "goal_price": 250000,
-      "dprt": "-32.80"
     }
   ],
   "target_consensus": {
-    "avg": 220143,
+    "avg": 215167,
     "high": 250000,
     "low": 190000,
-    "count": 7,
-    "days": 45
+    "count": 6,
+    "days": 30
   },
   "signals": [
     {
       "kind": "pos",
-      "text": "목표주가 컨센서스 평균 220,143원 — 현재가 대비 +31% (증권사 7곳)"
+      "text": "목표주가 컨센서스 평균 215,167원 — 현재가 대비 +28% (증권사 6곳)"
     }
   ]
 }

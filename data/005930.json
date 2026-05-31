@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.05.31 15:15",
+  "updated_label": "2026.05.31 15:33",
   "trade_date": "2026.05.29",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -982,14 +982,50 @@
       "prev_opinion": "매수",
       "goal_price": 500000,
       "dprt": "-46.80"
+    },
+    {
+      "date": "05.06",
+      "date_full": "20260506",
+      "broker": "교보",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 330000,
+      "dprt": "-29.55"
+    },
+    {
+      "date": "05.04",
+      "date_full": "20260504",
+      "broker": "DB증권",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 280000,
+      "dprt": "-21.25"
+    },
+    {
+      "date": "05.04",
+      "date_full": "20260504",
+      "broker": "삼성",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 300000,
+      "dprt": "-26.50"
+    },
+    {
+      "date": "05.04",
+      "date_full": "20260504",
+      "broker": "한화투자",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 330000,
+      "dprt": "-33.18"
     }
   ],
   "target_consensus": {
-    "avg": 416500,
+    "avg": 423158,
     "high": 570000,
     "low": 280000,
-    "count": 20,
-    "days": 45
+    "count": 19,
+    "days": 30
   },
   "signals": [
     {
@@ -1002,7 +1038,7 @@
     },
     {
       "kind": "pos",
-      "text": "목표주가 컨센서스 평균 416,500원 — 현재가 대비 +31% (증권사 20곳)"
+      "text": "목표주가 컨센서스 평균 423,158원 — 현재가 대비 +33% (증권사 19곳)"
     }
   ]
 }

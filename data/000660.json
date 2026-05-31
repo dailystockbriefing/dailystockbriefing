@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.05.31 15:16",
+  "updated_label": "2026.05.31 15:34",
   "trade_date": "2026.05.29",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -973,23 +973,14 @@
       "prev_opinion": "매수",
       "goal_price": 3000000,
       "dprt": "-46.63"
-    },
-    {
-      "date": "04.24",
-      "date_full": "20260424",
-      "broker": "DB증권",
-      "opinion": "BUY",
-      "prev_opinion": "BUY",
-      "goal_price": 1750000,
-      "dprt": "-30.00"
     }
   ],
   "target_consensus": {
-    "avg": 2607000,
+    "avg": 2975714,
     "high": 3800000,
-    "low": 1400000,
-    "count": 20,
-    "days": 45
+    "low": 1900000,
+    "count": 14,
+    "days": 30
   },
   "signals": [
     {
@@ -999,6 +990,10 @@
     {
       "kind": "pos",
       "text": "최근 20일 신고가"
+    },
+    {
+      "kind": "pos",
+      "text": "목표주가 컨센서스 평균 2,975,714원 — 현재가 대비 +27% (증권사 14곳)"
     }
   ]
 }
