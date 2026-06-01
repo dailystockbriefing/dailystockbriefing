@@ -1,18 +1,18 @@
 {
-  "updated_label": "2026.06.01 16:41",
+  "updated_label": "2026.06.01 18:29",
   "trade_date": "2026.06.01",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
     "name": "네이버",
     "ticker": "035420",
     "market": "KOSPI",
-    "close": 279500,
-    "change": 39500,
-    "change_pct": 16.46,
+    "close": 285500,
+    "change": 45500,
+    "change_pct": 18.96,
     "open": 247500,
     "high": 304000,
     "low": 240500,
-    "volume": 32922939,
+    "volume": 34253438,
     "marketcap": 42591230184000
   },
   "investors_hist": [
@@ -765,18 +765,13 @@
     }
   ],
   "short_latest": {
-    "date": "2026.05.27",
-    "qty": 596427,
-    "ratio": 0.38,
-    "qty_change": 7005,
-    "qty_change_pct": 1.19
+    "date": "2026.05.28",
+    "qty": 517015,
+    "ratio": 0.33,
+    "qty_change": -79412,
+    "qty_change_pct": -13.31
   },
   "short_trend": [
-    {
-      "date": "05.13",
-      "qty": 408337,
-      "ratio": 0.26
-    },
     {
       "date": "05.14",
       "qty": 394456,
@@ -821,9 +816,14 @@
       "date": "05.27",
       "qty": 596427,
       "ratio": 0.38
+    },
+    {
+      "date": "05.28",
+      "qty": 517015,
+      "ratio": 0.33
     }
   ],
-  "short_pending": true,
+  "short_pending": false,
   "opinions": [
     {
       "date": "05.28",
@@ -881,7 +881,7 @@
   "signals": [
     {
       "kind": "warn",
-      "text": "거래량 급증 — 최근 평균 대비 12.0배 (통합)"
+      "text": "거래량 급증 — 최근 평균 대비 12.5배 (통합)"
     },
     {
       "kind": "warn",

@@ -1,18 +1,18 @@
 {
-  "updated_label": "2026.06.01 16:41",
+  "updated_label": "2026.06.01 18:29",
   "trade_date": "2026.06.01",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
     "name": "리가켐바이오",
     "ticker": "141080",
     "market": "KOSDAQ",
-    "close": 146700,
-    "change": -4500,
-    "change_pct": -2.98,
+    "close": 147200,
+    "change": -4000,
+    "change_pct": -2.65,
     "open": 153000,
     "high": 157000,
     "low": 144300,
-    "volume": 558147,
+    "volume": 563359,
     "marketcap": 5434450562400
   },
   "investors_hist": [
@@ -765,18 +765,13 @@
     }
   ],
   "short_latest": {
-    "date": "2026.05.27",
-    "qty": 238894,
-    "ratio": 0.65,
-    "qty_change": 3181,
-    "qty_change_pct": 1.35
+    "date": "2026.05.28",
+    "qty": 264926,
+    "ratio": 0.72,
+    "qty_change": 26032,
+    "qty_change_pct": 10.9
   },
   "short_trend": [
-    {
-      "date": "05.13",
-      "qty": 89145,
-      "ratio": 0.24
-    },
     {
       "date": "05.14",
       "qty": 123763,
@@ -821,9 +816,14 @@
       "date": "05.27",
       "qty": 238894,
       "ratio": 0.65
+    },
+    {
+      "date": "05.28",
+      "qty": 264926,
+      "ratio": 0.72
     }
   ],
-  "short_pending": true,
+  "short_pending": false,
   "opinions": [
     {
       "date": "05.29",

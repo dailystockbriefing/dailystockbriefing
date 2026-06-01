@@ -1,18 +1,18 @@
 {
-  "updated_label": "2026.06.01 16:40",
+  "updated_label": "2026.06.01 18:29",
   "trade_date": "2026.06.01",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
     "name": "펩트론",
     "ticker": "087010",
     "market": "KOSDAQ",
-    "close": 278000,
-    "change": -28000,
-    "change_pct": -9.15,
+    "close": 277000,
+    "change": -29000,
+    "change_pct": -9.48,
     "open": 305500,
     "high": 312500,
     "low": 274000,
-    "volume": 498758,
+    "volume": 516184,
     "marketcap": 6493881975000
   },
   "investors_hist": [
@@ -765,18 +765,13 @@
     }
   ],
   "short_latest": {
-    "date": "2026.05.27",
-    "qty": 1084320,
-    "ratio": 4.65,
-    "qty_change": -54761,
-    "qty_change_pct": -4.81
+    "date": "2026.05.28",
+    "qty": 1040305,
+    "ratio": 4.46,
+    "qty_change": -44015,
+    "qty_change_pct": -4.06
   },
   "short_trend": [
-    {
-      "date": "05.13",
-      "qty": 1062539,
-      "ratio": 4.56
-    },
     {
       "date": "05.14",
       "qty": 1071542,
@@ -821,9 +816,14 @@
       "date": "05.27",
       "qty": 1084320,
       "ratio": 4.65
+    },
+    {
+      "date": "05.28",
+      "qty": 1040305,
+      "ratio": 4.46
     }
   ],
-  "short_pending": true,
+  "short_pending": false,
   "opinions": [],
   "target_consensus": null,
   "signals": [
@@ -837,7 +837,7 @@
     },
     {
       "kind": "warn",
-      "text": "공매도 잔고비중 4.65% (높음, 2026.05.27 기준)"
+      "text": "공매도 잔고비중 4.46% (높음, 2026.05.28 기준)"
     }
   ]
 }
