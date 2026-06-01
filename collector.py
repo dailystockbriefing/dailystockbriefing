@@ -30,11 +30,6 @@ MKT_CODE = "UN"        # UN=통합(KRX+NXT)
 HIST_DAYS = 10
 # ───────────────────────────────────────────────────────────
 
-VOL_SPIKE = 2.0
-GAP_PCT   = 5.0
-RANGE_PCT = 12.0
-
-
 def ymd(d):
     return d.strftime("%Y%m%d")
 
@@ -83,63 +78,6 @@ def collect_short(ticker, date_str):
     return latest, trend
 
 
-def build_signals(rows, short_latest):
-    """rows: KIS 통합 일자별(최신순). 통합 거래량 기준 특이점."""
-    sig = []
-    if not rows or len(rows) < 2:
-        return sig
-    today = rows[0]
-    o, h, l, c = today["open"], today["high"], today["low"], today["close"]
-    vol = today["volume"]; pc = c - today["change"]
-
-    hist_vol = [r["volume"] for r in rows[1:21]]
-    if hist_vol:
-        avg = sum(hist_vol) / len(hist_vol)
-        if avg > 0 and vol / avg >= VOL_SPIKE:
-            sig.append({"kind": "warn", "text": f"거래량 급증 — 최근 평균 대비 {vol/avg:.1f}배 (통합)"})
-
-    if pc > 0:
-        gap = (o - pc) / pc * 100
-        if abs(gap) >= GAP_PCT:
-            sig.append({"kind": "pos" if gap > 0 else "neg",
-                        "text": f"{'갭 상승' if gap>0 else '갭 하락'} 출발 {gap:+.1f}%"})
-        rng = (h - l) / pc * 100
-        if rng >= RANGE_PCT:
-            sig.append({"kind": "warn", "text": f"장중 변동폭 확대 {rng:.1f}%"})
-
-    if h > l:
-        pos = (c - l) / (h - l)
-        if pos >= 0.8 and c >= o:
-            sig.append({"kind": "pos", "text": "고가권 마감 — 매수 우위(짧은 윗꼬리)"})
-        elif pos <= 0.25:
-            sig.append({"kind": "neg", "text": "저가권 마감 — 윗꼬리 형성(매도 압력)"})
-
-    closes = [r["close"] for r in rows[:20]]
-    if c >= max(closes):
-        sig.append({"kind": "pos", "text": "최근 20일 신고가"})
-    elif c <= min(closes):
-        sig.append({"kind": "neg", "text": "최근 20일 신저가"})
-
-    f = today["value"].get("외국인", 0); i = today["value"].get("기관", 0)
-    if f > 0 and i > 0:
-        sig.append({"kind": "pos", "text": f"외국인·기관 동반 순매수 (+{f}억/+{i}억)"})
-    elif f < 0 and i < 0:
-        sig.append({"kind": "neg", "text": f"외국인·기관 동반 순매도 ({f}억/{i}억)"})
-
-    streak = 0
-    for r in rows:
-        if r["value"].get("외국인", 0) > 0: streak += 1
-        else: break
-    if streak >= 3:
-        sig.append({"kind": "info", "text": f"외국인 {streak}일 연속 순매수"})
-
-    if short_latest:
-        rt = short_latest.get("ratio")
-        if rt is not None and rt >= 3.0:
-            sig.append({"kind": "warn", "text": f"공매도 잔고비중 {rt:.2f}% (높음, {short_latest['date']} 기준)"})
-        if short_latest.get("qty_change_pct", 0) >= 15:
-            sig.append({"kind": "warn", "text": f"공매도 잔고 급증 — 전일 대비 +{short_latest['qty_change']:,}주"})
-    return sig
 
 
 def collect_all(stk, short_pending=None):
@@ -154,6 +92,27 @@ def collect_all(stk, short_pending=None):
     rows = base[:HIST_DAYS]
     today = rows[0]
     date_str = today["date_full"]
+
+    # 헤더용 시장별 당일 종가 + 전일 KRX 정규장 종가(등락률 분모, 항상 고정)
+    j_rows = mkts.get("J") or []
+    nx_rows = mkts.get("NX") or []
+    un_rows = mkts.get("UN") or []
+    def close_at(rws):
+        r = next((x for x in rws if x["date_full"] == date_str), None)
+        return r["close"] if r else None
+    j_close = close_at(j_rows)
+    nx_close = close_at(nx_rows)
+    un_close = close_at(un_rows)
+    # 전일 KRX 종가 = j_rows에서 date_str 바로 다음(과거) 행
+    prev_krx_close = None
+    for idx, r in enumerate(j_rows):
+        if r["date_full"] == date_str and idx + 1 < len(j_rows):
+            prev_krx_close = j_rows[idx + 1]["close"]
+            break
+    # 통합 당일 종가: 20시(KST) 이후면 NXT 최종, 그 전이면 KRX
+    after_nxt_close = now.hour >= 20
+    un_header_close = (nx_close if (after_nxt_close and nx_close) else j_close) or un_close
+    j_today = next((r for r in j_rows if r["date_full"] == date_str), None) or today
 
     # 날짜축은 통합 기준. 각 날짜에 대해 시장별 value/volume 매핑.
     def market_row(mk, date_full):
@@ -231,19 +190,6 @@ def collect_all(stk, short_pending=None):
     print(f"  [컨센서스] {ticker}: {consensus['count'] if consensus else 0}곳 "
           f"평균 {consensus['avg'] if consensus else '—'}")
 
-    # 3) 특이점 (통합 거래량 기준)
-    signals = build_signals(base, short_latest)
-
-    # 목표주가 상승여력 신호
-    if consensus and today.get("close"):
-        upside = (consensus["avg"] - today["close"]) / today["close"] * 100
-        if upside >= 20:
-            signals.append({"kind": "pos",
-                "text": f"목표주가 컨센서스 평균 {consensus['avg']:,}원 — 현재가 대비 +{upside:.0f}% (증권사 {consensus['count']}곳)"})
-        elif upside <= -10:
-            signals.append({"kind": "neg",
-                "text": f"현재가가 목표주가 평균({consensus['avg']:,}원)을 {abs(upside):.0f}% 상회 (증권사 {consensus['count']}곳)"})
-
     if short_pending is None:
         before = (now.hour < 18) or (now.hour == 18 and now.minute < 10)
         short_pending = (now.weekday() < 5) and before
@@ -254,8 +200,10 @@ def collect_all(stk, short_pending=None):
         "market_basis": "통합(KRX+NXT)",
         "stock": {
             "name": name, "ticker": ticker, "market": market,
-            "close": today["close"], "change": today["change"], "change_pct": today["change_pct"],
-            "open": today["open"], "high": today["high"], "low": today["low"],
+            "close_by_market": {"UN": un_header_close, "J": j_close, "NX": nx_close},
+            "prev_krx_close": prev_krx_close,
+            "after_nxt_close": after_nxt_close,
+            "open": j_today["open"], "high": j_today["high"], "low": j_today["low"],
             "volume": today["volume"], "marketcap": marketcap,
         },
         "investors_hist": investors_hist,
@@ -264,7 +212,6 @@ def collect_all(stk, short_pending=None):
         "short_pending": bool(short_pending),
         "opinions": display_ops,
         "target_consensus": consensus,
-        "signals": signals,
     }
     return data
 
