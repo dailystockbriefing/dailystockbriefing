@@ -1,18 +1,18 @@
 {
-  "updated_label": "2026.06.01 15:52",
+  "updated_label": "2026.06.01 16:41",
   "trade_date": "2026.06.01",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
     "name": "삼성전자",
     "ticker": "005930",
     "market": "KOSPI",
-    "close": 350000,
-    "change": 31500,
-    "change_pct": 9.89,
+    "close": 349500,
+    "change": 31000,
+    "change_pct": 9.73,
     "open": 318000,
     "high": 354500,
     "low": 311000,
-    "volume": 70026371,
+    "volume": 71117332,
     "marketcap": 2040351234192000
   },
   "investors_hist": [

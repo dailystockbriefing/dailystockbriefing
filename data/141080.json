@@ -1,18 +1,18 @@
 {
-  "updated_label": "2026.06.01 15:52",
+  "updated_label": "2026.06.01 16:41",
   "trade_date": "2026.06.01",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
     "name": "리가켐바이오",
     "ticker": "141080",
     "market": "KOSDAQ",
-    "close": 147200,
-    "change": -4000,
-    "change_pct": -2.65,
+    "close": 146700,
+    "change": -4500,
+    "change_pct": -2.98,
     "open": 153000,
     "high": 157000,
     "low": 144300,
-    "volume": 555522,
+    "volume": 558147,
     "marketcap": 5434450562400
   },
   "investors_hist": [

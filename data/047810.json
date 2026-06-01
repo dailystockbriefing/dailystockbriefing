@@ -1,18 +1,18 @@
 {
-  "updated_label": "2026.06.01 15:52",
+  "updated_label": "2026.06.01 16:41",
   "trade_date": "2026.06.01",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
     "name": "한국항공우주",
     "ticker": "047810",
     "market": "KOSPI",
-    "close": 164000,
-    "change": -4500,
-    "change_pct": -2.67,
+    "close": 164700,
+    "change": -3800,
+    "change_pct": -2.26,
     "open": 168200,
     "high": 173500,
     "low": 162000,
-    "volume": 1193458,
+    "volume": 1205976,
     "marketcap": 15888442441000
   },
   "investors_hist": [

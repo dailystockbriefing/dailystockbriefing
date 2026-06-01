@@ -21,6 +21,11 @@
       "market": "KOSDAQ"
     },
     {
+      "ticker": "011070",
+      "name": "LG이노텍",
+      "market": "KOSPI"
+    },
+    {
       "ticker": "005930",
       "name": "삼성전자",
       "market": "KOSPI"
@@ -41,5 +46,5 @@
       "market": "KOSPI"
     }
   ],
-  "updated_label": "2026.06.01 15:51"
+  "updated_label": "2026.06.01 16:40"
 }
