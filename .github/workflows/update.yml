@@ -64,9 +64,9 @@ jobs:
         run: |
           case "${{ steps.m.outputs.mode }}" in
             once)  python poll.py --mode once ;;
-            short) python poll.py --mode short  --interval 60 --max-minutes 16 ;;
-            final) python poll.py --mode final  --interval 60 --max-minutes 20 ;;
-            *)     python poll.py --mode invest --interval 30 --max-minutes 9  ;;
+            short) python poll.py --mode short  --interval 30 --max-minutes 16 ;;
+            final) python poll.py --mode final  --interval 30 --max-minutes 20 ;;
+            *)     python poll.py --mode invest --interval 15 --max-minutes 12 ;;
           esac
 
       - name: Commit data (변경분만)
