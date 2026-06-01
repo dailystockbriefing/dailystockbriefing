@@ -1,17 +1,21 @@
 {
-  "updated_label": "2026.06.01 20:08",
+  "updated_label": "2026.06.01 20:28",
   "trade_date": "2026.06.01",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
     "name": "현대차",
     "ticker": "005380",
     "market": "KOSPI",
-    "close": 762000,
-    "change": 29000,
-    "change_pct": 3.96,
-    "open": 733000,
+    "close_by_market": {
+      "UN": 762000,
+      "J": 750000,
+      "NX": 762000
+    },
+    "prev_krx_close": 723000,
+    "after_nxt_close": true,
+    "open": 736000,
     "high": 783000,
-    "low": 711000,
+    "low": 727000,
     "volume": 6443991,
     "marketcap": 153568324500000
   },
@@ -936,11 +940,5 @@
     "low": 750000,
     "count": 9,
     "days": 30
-  },
-  "signals": [
-    {
-      "kind": "pos",
-      "text": "최근 20일 신고가"
-    }
-  ]
+  }
 }

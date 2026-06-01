@@ -1,17 +1,21 @@
 {
-  "updated_label": "2026.06.01 20:07",
+  "updated_label": "2026.06.01 20:27",
   "trade_date": "2026.06.01",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
     "name": "LG이노텍",
     "ticker": "011070",
     "market": "KOSPI",
-    "close": 1517000,
-    "change": 43000,
-    "change_pct": 2.92,
-    "open": 1480000,
-    "high": 1814000,
-    "low": 1384000,
+    "close_by_market": {
+      "UN": 1517000,
+      "J": 1530000,
+      "NX": 1517000
+    },
+    "prev_krx_close": 1458000,
+    "after_nxt_close": true,
+    "open": 1601000,
+    "high": 1788000,
+    "low": 1490000,
     "volume": 3514232,
     "marketcap": 36210673710000
   },
@@ -963,31 +967,5 @@
     "low": 810000,
     "count": 12,
     "days": 30
-  },
-  "signals": [
-    {
-      "kind": "warn",
-      "text": "거래량 급증 — 최근 평균 대비 4.2배 (통합)"
-    },
-    {
-      "kind": "warn",
-      "text": "장중 변동폭 확대 29.2%"
-    },
-    {
-      "kind": "pos",
-      "text": "최근 20일 신고가"
-    },
-    {
-      "kind": "neg",
-      "text": "외국인·기관 동반 순매도 (-5293억/-918억)"
-    },
-    {
-      "kind": "warn",
-      "text": "공매도 잔고 급증 — 전일 대비 +38,776주"
-    },
-    {
-      "kind": "neg",
-      "text": "현재가가 목표주가 평균(1,196,917원)을 21% 상회 (증권사 12곳)"
-    }
-  ]
+  }
 }

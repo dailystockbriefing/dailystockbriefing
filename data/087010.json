@@ -1,16 +1,20 @@
 {
-  "updated_label": "2026.06.01 20:07",
+  "updated_label": "2026.06.01 20:27",
   "trade_date": "2026.06.01",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
     "name": "펩트론",
     "ticker": "087010",
     "market": "KOSDAQ",
-    "close": 276000,
-    "change": -30000,
-    "change_pct": -9.8,
-    "open": 305500,
-    "high": 312500,
+    "close_by_market": {
+      "UN": 276000,
+      "J": 278500,
+      "NX": 276000
+    },
+    "prev_krx_close": 301000,
+    "after_nxt_close": true,
+    "open": 302500,
+    "high": 303000,
     "low": 274000,
     "volume": 530671,
     "marketcap": 6493881975000
@@ -848,19 +852,5 @@
   ],
   "short_pending": false,
   "opinions": [],
-  "target_consensus": null,
-  "signals": [
-    {
-      "kind": "warn",
-      "text": "장중 변동폭 확대 12.6%"
-    },
-    {
-      "kind": "neg",
-      "text": "저가권 마감 — 윗꼬리 형성(매도 압력)"
-    },
-    {
-      "kind": "warn",
-      "text": "공매도 잔고비중 4.46% (높음, 2026.05.28 기준)"
-    }
-  ]
+  "target_consensus": null
 }

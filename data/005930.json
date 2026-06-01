@@ -1,17 +1,21 @@
 {
-  "updated_label": "2026.06.01 20:07",
+  "updated_label": "2026.06.01 20:28",
   "trade_date": "2026.06.01",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
     "name": "삼성전자",
     "ticker": "005930",
     "market": "KOSPI",
-    "close": 355000,
-    "change": 36500,
-    "change_pct": 11.46,
-    "open": 318000,
-    "high": 355500,
-    "low": 311000,
+    "close_by_market": {
+      "UN": 355000,
+      "J": 349000,
+      "NX": 355000
+    },
+    "prev_krx_close": 317000,
+    "after_nxt_close": true,
+    "open": 319500,
+    "high": 354500,
+    "low": 319500,
     "volume": 81557705,
     "marketcap": 2040351234192000
   },
@@ -1026,23 +1030,5 @@
     "low": 280000,
     "count": 19,
     "days": 30
-  },
-  "signals": [
-    {
-      "kind": "warn",
-      "text": "장중 변동폭 확대 14.0%"
-    },
-    {
-      "kind": "pos",
-      "text": "고가권 마감 — 매수 우위(짧은 윗꼬리)"
-    },
-    {
-      "kind": "pos",
-      "text": "최근 20일 신고가"
-    },
-    {
-      "kind": "pos",
-      "text": "외국인·기관 동반 순매수 (+3585억/+14371억)"
-    }
-  ]
+  }
 }

@@ -1,17 +1,21 @@
 {
-  "updated_label": "2026.06.01 20:07",
+  "updated_label": "2026.06.01 20:27",
   "trade_date": "2026.06.01",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
     "name": "두산로보틱스",
     "ticker": "454910",
     "market": "KOSPI",
-    "close": 138400,
-    "change": 29200,
-    "change_pct": 26.74,
-    "open": 111400,
+    "close_by_market": {
+      "UN": 138400,
+      "J": 138400,
+      "NX": 138400
+    },
+    "prev_krx_close": 106500,
+    "after_nxt_close": true,
+    "open": 123900,
     "high": 138400,
-    "low": 110200,
+    "low": 123200,
     "volume": 10477979,
     "marketcap": 8971085232000
   },
@@ -891,27 +895,5 @@
     "low": 145000,
     "count": 1,
     "days": 30
-  },
-  "signals": [
-    {
-      "kind": "warn",
-      "text": "거래량 급증 — 최근 평균 대비 2.1배 (통합)"
-    },
-    {
-      "kind": "warn",
-      "text": "장중 변동폭 확대 25.8%"
-    },
-    {
-      "kind": "pos",
-      "text": "고가권 마감 — 매수 우위(짧은 윗꼬리)"
-    },
-    {
-      "kind": "pos",
-      "text": "최근 20일 신고가"
-    },
-    {
-      "kind": "pos",
-      "text": "외국인·기관 동반 순매수 (+1414억/+53억)"
-    }
-  ]
+  }
 }

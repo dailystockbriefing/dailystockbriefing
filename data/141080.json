@@ -1,16 +1,20 @@
 {
-  "updated_label": "2026.06.01 20:07",
+  "updated_label": "2026.06.01 20:27",
   "trade_date": "2026.06.01",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
     "name": "리가켐바이오",
     "ticker": "141080",
     "market": "KOSDAQ",
-    "close": 147800,
-    "change": -3400,
-    "change_pct": -2.25,
-    "open": 153000,
-    "high": 157000,
+    "close_by_market": {
+      "UN": 147800,
+      "J": 146800,
+      "NX": 147800
+    },
+    "prev_krx_close": 151100,
+    "after_nxt_close": true,
+    "open": 151100,
+    "high": 155600,
     "low": 144300,
     "volume": 570894,
     "marketcap": 5434450562400
@@ -873,11 +877,5 @@
     "low": 210000,
     "count": 1,
     "days": 30
-  },
-  "signals": [
-    {
-      "kind": "pos",
-      "text": "목표주가 컨센서스 평균 210,000원 — 현재가 대비 +42% (증권사 1곳)"
-    }
-  ]
+  }
 }

@@ -1,17 +1,21 @@
 {
-  "updated_label": "2026.06.01 20:07",
+  "updated_label": "2026.06.01 20:27",
   "trade_date": "2026.06.01",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
     "name": "네이버",
     "ticker": "035420",
     "market": "KOSPI",
-    "close": 283500,
-    "change": 43500,
-    "change_pct": 18.12,
-    "open": 247500,
+    "close_by_market": {
+      "UN": 283500,
+      "J": 271500,
+      "NX": 283500
+    },
+    "prev_krx_close": 234000,
+    "after_nxt_close": true,
+    "open": 251000,
     "high": 304000,
-    "low": 240500,
+    "low": 244500,
     "volume": 35347623,
     "marketcap": 42591230184000
   },
@@ -900,19 +904,5 @@
     "low": 250000,
     "count": 5,
     "days": 30
-  },
-  "signals": [
-    {
-      "kind": "warn",
-      "text": "거래량 급증 — 최근 평균 대비 12.9배 (통합)"
-    },
-    {
-      "kind": "warn",
-      "text": "장중 변동폭 확대 26.5%"
-    },
-    {
-      "kind": "pos",
-      "text": "최근 20일 신고가"
-    }
-  ]
+  }
 }

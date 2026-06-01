@@ -1,17 +1,21 @@
 {
-  "updated_label": "2026.06.01 20:08",
+  "updated_label": "2026.06.01 20:28",
   "trade_date": "2026.06.01",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
     "name": "SK하이닉스",
     "ticker": "000660",
     "market": "KOSPI",
-    "close": 2378000,
-    "change": 28000,
-    "change_pct": 1.19,
-    "open": 2337000,
+    "close_by_market": {
+      "UN": 2378000,
+      "J": 2363000,
+      "NX": 2378000
+    },
+    "prev_krx_close": 2333000,
+    "after_nxt_close": true,
+    "open": 2299000,
     "high": 2398000,
-    "low": 2255000,
+    "low": 2296000,
     "volume": 9321336,
     "marketcap": 1684115688495000
   },
@@ -981,19 +985,5 @@
     "low": 1900000,
     "count": 14,
     "days": 30
-  },
-  "signals": [
-    {
-      "kind": "pos",
-      "text": "고가권 마감 — 매수 우위(짧은 윗꼬리)"
-    },
-    {
-      "kind": "pos",
-      "text": "최근 20일 신고가"
-    },
-    {
-      "kind": "pos",
-      "text": "목표주가 컨센서스 평균 2,975,714원 — 현재가 대비 +25% (증권사 14곳)"
-    }
-  ]
+  }
 }

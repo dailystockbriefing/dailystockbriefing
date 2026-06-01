@@ -1,15 +1,19 @@
 {
-  "updated_label": "2026.06.01 20:08",
+  "updated_label": "2026.06.01 20:28",
   "trade_date": "2026.06.01",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
     "name": "한국항공우주",
     "ticker": "047810",
     "market": "KOSPI",
-    "close": 164600,
-    "change": -3900,
-    "change_pct": -2.31,
-    "open": 168200,
+    "close_by_market": {
+      "UN": 164600,
+      "J": 163000,
+      "NX": 164600
+    },
+    "prev_krx_close": 168300,
+    "after_nxt_close": true,
+    "open": 165400,
     "high": 173500,
     "low": 162000,
     "volume": 1250932,
@@ -909,23 +913,5 @@
     "low": 190000,
     "count": 6,
     "days": 30
-  },
-  "signals": [
-    {
-      "kind": "neg",
-      "text": "저가권 마감 — 윗꼬리 형성(매도 압력)"
-    },
-    {
-      "kind": "pos",
-      "text": "외국인·기관 동반 순매수 (+93억/+355억)"
-    },
-    {
-      "kind": "warn",
-      "text": "공매도 잔고비중 3.03% (높음, 2026.05.28 기준)"
-    },
-    {
-      "kind": "pos",
-      "text": "목표주가 컨센서스 평균 215,167원 — 현재가 대비 +31% (증권사 6곳)"
-    }
-  ]
+  }
 }
