@@ -20,6 +20,7 @@ STOCKS = [
     {"ticker": "035420", "name": "네이버",       "market": "KOSPI"},
     {"ticker": "454910", "name": "두산로보틱스", "market": "KOSPI"},
     {"ticker": "141080", "name": "리가켐바이오", "market": "KOSDAQ"},
+    {"ticker": "011070", "name": "LG이노텍",     "market": "KOSPI"},
     {"ticker": "005930", "name": "삼성전자",     "market": "KOSPI"},
     {"ticker": "047810", "name": "한국항공우주", "market": "KOSPI"},
     {"ticker": "005380", "name": "현대차",       "market": "KOSPI"},
