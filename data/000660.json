@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.06.01 20:28",
+  "updated_label": "2026.06.02 06:23",
   "trade_date": "2026.06.01",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -7,16 +7,16 @@
     "ticker": "000660",
     "market": "KOSPI",
     "close_by_market": {
-      "UN": 2378000,
+      "UN": 2363000,
       "J": 2363000,
-      "NX": 2378000
+      "NX": 2363000
     },
-    "prev_krx_close": 2333000,
-    "after_nxt_close": true,
-    "open": 2299000,
-    "high": 2398000,
-    "low": 2296000,
-    "volume": 9321336,
+    "prev_krx_close": 2363000,
+    "after_nxt_close": false,
+    "open": 2363000,
+    "high": 2363000,
+    "low": 2363000,
+    "volume": 0,
     "marketcap": 1684115688495000
   },
   "investors_hist": [
@@ -850,8 +850,17 @@
       "ratio": 0.0
     }
   ],
-  "short_pending": false,
+  "short_pending": true,
   "opinions": [
+    {
+      "date": "06.01",
+      "date_full": "20260601",
+      "broker": "SK",
+      "opinion": "매수",
+      "prev_opinion": "매수",
+      "goal_price": 4000000,
+      "dprt": "-41.68"
+    },
     {
       "date": "05.29",
       "date_full": "20260529",
@@ -968,20 +977,11 @@
       "prev_opinion": "BUY",
       "goal_price": 2500000,
       "dprt": "-32.56"
-    },
-    {
-      "date": "05.07",
-      "date_full": "20260507",
-      "broker": "SK",
-      "opinion": "매수",
-      "prev_opinion": "매수",
-      "goal_price": 3000000,
-      "dprt": "-46.63"
     }
   ],
   "target_consensus": {
-    "avg": 2975714,
-    "high": 3800000,
+    "avg": 3047143,
+    "high": 4000000,
     "low": 1900000,
     "count": 14,
     "days": 30
