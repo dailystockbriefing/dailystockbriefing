@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.06.02 20:37",
+  "updated_label": "2026.06.03 05:09",
   "trade_date": "2026.06.02",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -7,12 +7,12 @@
     "ticker": "000660",
     "market": "KOSPI",
     "close_by_market": {
-      "UN": 2324000,
+      "UN": 2360000,
       "J": 2360000,
       "NX": 2324000
     },
     "prev_krx_close": 2363000,
-    "after_nxt_close": true,
+    "after_nxt_close": false,
     "open": 2376000,
     "high": 2407000,
     "low": 2259000,
@@ -850,8 +850,17 @@
       "ratio": 0.0
     }
   ],
-  "short_pending": false,
+  "short_pending": true,
   "opinions": [
+    {
+      "date": "06.02",
+      "date_full": "20260602",
+      "broker": "대신",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 3400000,
+      "dprt": "-30.50"
+    },
     {
       "date": "06.01",
       "date_full": "20260601",
@@ -968,19 +977,10 @@
       "prev_opinion": "Buy",
       "goal_price": 2100000,
       "dprt": "-19.71"
-    },
-    {
-      "date": "05.11",
-      "date_full": "20260511",
-      "broker": "대신",
-      "opinion": "BUY",
-      "prev_opinion": "BUY",
-      "goal_price": 2500000,
-      "dprt": "-32.56"
     }
   ],
   "target_consensus": {
-    "avg": 3097143,
+    "avg": 3161429,
     "high": 4000000,
     "low": 2100000,
     "count": 14,

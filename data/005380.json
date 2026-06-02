@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.06.02 20:37",
+  "updated_label": "2026.06.03 05:09",
   "trade_date": "2026.06.02",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -7,12 +7,12 @@
     "ticker": "005380",
     "market": "KOSPI",
     "close_by_market": {
-      "UN": 722000,
+      "UN": 729000,
       "J": 729000,
       "NX": 722000
     },
     "prev_krx_close": 750000,
-    "after_nxt_close": true,
+    "after_nxt_close": false,
     "open": 770000,
     "high": 772000,
     "low": 697000,
@@ -850,8 +850,26 @@
       "ratio": 1.9
     }
   ],
-  "short_pending": false,
+  "short_pending": true,
   "opinions": [
+    {
+      "date": "06.02",
+      "date_full": "20260602",
+      "broker": "다올투자",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 1000000,
+      "dprt": "-25.00"
+    },
+    {
+      "date": "06.02",
+      "date_full": "20260602",
+      "broker": "한국투자",
+      "opinion": "매수",
+      "prev_opinion": "매수",
+      "goal_price": 710000,
+      "dprt": "5.63"
+    },
     {
       "date": "05.28",
       "date_full": "20260528",
@@ -935,10 +953,10 @@
     }
   ],
   "target_consensus": {
-    "avg": 890000,
+    "avg": 883636,
     "high": 1200000,
-    "low": 750000,
-    "count": 9,
+    "low": 710000,
+    "count": 11,
     "days": 30
   }
 }
