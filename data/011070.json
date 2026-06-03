@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.06.04 05:15",
+  "updated_label": "2026.06.04 07:01",
   "trade_date": "2026.06.02",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -9,14 +9,14 @@
     "close_by_market": {
       "UN": 1252000,
       "J": 1252000,
-      "NX": 1177000
+      "NX": 1252000
     },
-    "prev_krx_close": 1530000,
+    "prev_krx_close": 1252000,
     "after_nxt_close": false,
-    "open": 1381000,
-    "high": 1381000,
-    "low": 1150000,
-    "volume": 2381394,
+    "open": 1252000,
+    "high": 1252000,
+    "low": 1252000,
+    "volume": 0,
     "marketcap": 29631217964000
   },
   "investors_hist": [
