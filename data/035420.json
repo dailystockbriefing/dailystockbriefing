@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.06.03 05:40",
+  "updated_label": "2026.06.04 05:15",
   "trade_date": "2026.06.02",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -878,31 +878,13 @@
       "prev_opinion": "매수",
       "goal_price": 280000,
       "dprt": "-31.61"
-    },
-    {
-      "date": "05.04",
-      "date_full": "20260504",
-      "broker": "LS증권",
-      "opinion": "Buy",
-      "prev_opinion": "Buy",
-      "goal_price": 289000,
-      "dprt": "-26.99"
-    },
-    {
-      "date": "05.04",
-      "date_full": "20260504",
-      "broker": "유진투자",
-      "opinion": "BUY",
-      "prev_opinion": "BUY",
-      "goal_price": 320000,
-      "dprt": "-34.06"
     }
   ],
   "target_consensus": {
-    "avg": 283800,
-    "high": 320000,
+    "avg": 270000,
+    "high": 280000,
     "low": 250000,
-    "count": 5,
+    "count": 3,
     "days": 30
   }
 }
