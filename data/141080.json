@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.06.04 20:28",
+  "updated_label": "2026.06.05 03:16",
   "trade_date": "2026.06.04",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -7,12 +7,12 @@
     "ticker": "141080",
     "market": "KOSDAQ",
     "close_by_market": {
-      "UN": 142300,
+      "UN": 145600,
       "J": 145600,
       "NX": 142300
     },
     "prev_krx_close": 147700,
-    "after_nxt_close": true,
+    "after_nxt_close": false,
     "open": 150400,
     "high": 158500,
     "low": 143600,
@@ -850,7 +850,7 @@
       "ratio": 0.69
     }
   ],
-  "short_pending": false,
+  "short_pending": true,
   "opinions": [
     {
       "date": "06.02",
