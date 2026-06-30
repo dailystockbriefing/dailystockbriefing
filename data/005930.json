@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.06.30 20:57",
+  "updated_label": "2026.06.30 22:10",
   "trade_date": "2026.06.30",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -850,8 +850,26 @@
       "ratio": 0.0
     }
   ],
-  "short_pending": true,
+  "short_pending": false,
   "opinions": [
+    {
+      "date": "06.30",
+      "date_full": "20260630",
+      "broker": "한화투자",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 580000,
+      "dprt": "-44.31"
+    },
+    {
+      "date": "06.30",
+      "date_full": "20260630",
+      "broker": "신한투자증권",
+      "opinion": "매수",
+      "prev_opinion": "매수",
+      "goal_price": 590000,
+      "dprt": "-45.25"
+    },
     {
       "date": "06.29",
       "date_full": "20260629",
@@ -971,10 +989,10 @@
     }
   ],
   "target_consensus": {
-    "avg": 503462,
+    "avg": 514333,
     "high": 610000,
     "low": 400000,
-    "count": 13,
+    "count": 15,
     "days": 30
   }
 }
