@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.07.06 20:13",
+  "updated_label": "2026.07.06 21:55",
   "trade_date": "2026.07.06",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -853,6 +853,15 @@
   "short_pending": true,
   "opinions": [
     {
+      "date": "07.06",
+      "date_full": "20260706",
+      "broker": "메리츠",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 500000,
+      "dprt": "-38.10"
+    },
+    {
       "date": "07.03",
       "date_full": "20260703",
       "broker": "DB증권",
@@ -970,15 +979,6 @@
       "dprt": "-26.82"
     },
     {
-      "date": "06.10",
-      "date_full": "20260610",
-      "broker": "메리츠",
-      "opinion": "BUY",
-      "prev_opinion": "BUY",
-      "goal_price": 420000,
-      "dprt": "-23.33"
-    },
-    {
       "date": "06.08",
       "date_full": "20260608",
       "broker": "NH투자",
@@ -989,7 +989,7 @@
     }
   ],
   "target_consensus": {
-    "avg": 509667,
+    "avg": 515000,
     "high": 590000,
     "low": 360000,
     "count": 15,

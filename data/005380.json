@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.07.06 20:13",
+  "updated_label": "2026.07.06 21:56",
   "trade_date": "2026.07.06",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -853,6 +853,15 @@
   "short_pending": true,
   "opinions": [
     {
+      "date": "07.06",
+      "date_full": "20260706",
+      "broker": "다올투자",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 800000,
+      "dprt": "-38.50"
+    },
+    {
       "date": "06.18",
       "date_full": "20260618",
       "broker": "한화투자",
@@ -899,10 +908,10 @@
     }
   ],
   "target_consensus": {
-    "avg": 778000,
+    "avg": 781667,
     "high": 900000,
     "low": 690000,
-    "count": 5,
+    "count": 6,
     "days": 30
   }
 }
