@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.07.07 20:57",
+  "updated_label": "2026.07.07 22:22",
   "trade_date": "2026.07.07",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -850,8 +850,26 @@
       "ratio": 2.5
     }
   ],
-  "short_pending": true,
+  "short_pending": false,
   "opinions": [
+    {
+      "date": "07.07",
+      "date_full": "20260707",
+      "broker": "LS증권",
+      "opinion": "Buy",
+      "prev_opinion": "Buy",
+      "goal_price": 720000,
+      "dprt": "-30.28"
+    },
+    {
+      "date": "07.07",
+      "date_full": "20260707",
+      "broker": "삼성",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 800000,
+      "dprt": "-37.25"
+    },
     {
       "date": "07.06",
       "date_full": "20260706",
@@ -908,10 +926,10 @@
     }
   ],
   "target_consensus": {
-    "avg": 781667,
+    "avg": 776250,
     "high": 900000,
     "low": 690000,
-    "count": 6,
+    "count": 8,
     "days": 30
   }
 }
