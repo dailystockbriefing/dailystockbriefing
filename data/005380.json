@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.07.20 20:55",
+  "updated_label": "2026.07.20 22:07",
   "trade_date": "2026.07.20",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -850,8 +850,17 @@
       "ratio": 2.09
     }
   ],
-  "short_pending": true,
+  "short_pending": false,
   "opinions": [
+    {
+      "date": "07.20",
+      "date_full": "20260720",
+      "broker": "미래에셋",
+      "opinion": "매수",
+      "prev_opinion": "매수",
+      "goal_price": 840000,
+      "dprt": "-49.40"
+    },
     {
       "date": "07.15",
       "date_full": "20260715",
@@ -926,10 +935,10 @@
     }
   ],
   "target_consensus": {
-    "avg": 758750,
+    "avg": 767778,
     "high": 900000,
     "low": 630000,
-    "count": 8,
+    "count": 9,
     "days": 30
   }
 }
