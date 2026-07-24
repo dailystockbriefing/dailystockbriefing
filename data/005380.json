@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.07.24 20:12",
+  "updated_label": "2026.07.24 21:19",
   "trade_date": "2026.07.24",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -850,8 +850,44 @@
       "ratio": 1.7
     }
   ],
-  "short_pending": true,
+  "short_pending": false,
   "opinions": [
+    {
+      "date": "07.24",
+      "date_full": "20260724",
+      "broker": "유안타",
+      "opinion": "BUY",
+      "prev_opinion": "Hold",
+      "goal_price": 570000,
+      "dprt": "-24.21"
+    },
+    {
+      "date": "07.24",
+      "date_full": "20260724",
+      "broker": "NH투자",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 760000,
+      "dprt": "-43.16"
+    },
+    {
+      "date": "07.24",
+      "date_full": "20260724",
+      "broker": "한국투자",
+      "opinion": "매수",
+      "prev_opinion": "매수",
+      "goal_price": 640000,
+      "dprt": "-32.50"
+    },
+    {
+      "date": "07.24",
+      "date_full": "20260724",
+      "broker": "교보",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 740000,
+      "dprt": "-41.62"
+    },
     {
       "date": "07.23",
       "date_full": "20260723",
@@ -953,10 +989,10 @@
     }
   ],
   "target_consensus": {
-    "avg": 756364,
+    "avg": 735333,
     "high": 900000,
-    "low": 630000,
-    "count": 11,
+    "low": 570000,
+    "count": 15,
     "days": 30
   }
 }
