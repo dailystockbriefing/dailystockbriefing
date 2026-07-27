@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.07.27 19:26",
+  "updated_label": "2026.07.27 21:30",
   "trade_date": "2026.07.27",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -12,7 +12,7 @@
       "NX": null
     },
     "prev_krx_close": 64700,
-    "after_nxt_close": false,
+    "after_nxt_close": true,
     "open": 65100,
     "high": 68600,
     "low": 64300,
@@ -828,6 +828,25 @@
     }
   ],
   "short_pending": true,
-  "opinions": [],
+  "opinions": [
+    {
+      "date": "07.27",
+      "date_full": "20260727",
+      "broker": "삼성",
+      "opinion": "NotRated",
+      "prev_opinion": "NotRated",
+      "goal_price": 0,
+      "dprt": "0.00"
+    },
+    {
+      "date": "07.27",
+      "date_full": "20260727",
+      "broker": "한국투자",
+      "opinion": "NotRated",
+      "prev_opinion": "NotRated",
+      "goal_price": 0,
+      "dprt": "0.00"
+    }
+  ],
   "target_consensus": null
 }
