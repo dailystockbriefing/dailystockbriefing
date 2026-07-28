@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.07.28 20:27",
+  "updated_label": "2026.07.28 21:54",
   "trade_date": "2026.07.28",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -850,8 +850,98 @@
       "ratio": 0.05
     }
   ],
-  "short_pending": true,
+  "short_pending": false,
   "opinions": [
+    {
+      "date": "07.28",
+      "date_full": "20260728",
+      "broker": "다올투자",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 1100000,
+      "dprt": "-44.18"
+    },
+    {
+      "date": "07.28",
+      "date_full": "20260728",
+      "broker": "IBK투자",
+      "opinion": "매수",
+      "prev_opinion": "매수",
+      "goal_price": 850000,
+      "dprt": "-27.76"
+    },
+    {
+      "date": "07.28",
+      "date_full": "20260728",
+      "broker": "IM증권",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 910000,
+      "dprt": "-32.53"
+    },
+    {
+      "date": "07.28",
+      "date_full": "20260728",
+      "broker": "DB증권",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 950000,
+      "dprt": "-35.37"
+    },
+    {
+      "date": "07.28",
+      "date_full": "20260728",
+      "broker": "삼성",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 800000,
+      "dprt": "-23.25"
+    },
+    {
+      "date": "07.28",
+      "date_full": "20260728",
+      "broker": "NH투자",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 1000000,
+      "dprt": "-38.60"
+    },
+    {
+      "date": "07.28",
+      "date_full": "20260728",
+      "broker": "메리츠",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 1200000,
+      "dprt": "-48.83"
+    },
+    {
+      "date": "07.28",
+      "date_full": "20260728",
+      "broker": "유진투자",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 900000,
+      "dprt": "-31.78"
+    },
+    {
+      "date": "07.28",
+      "date_full": "20260728",
+      "broker": "미래에셋",
+      "opinion": "매수",
+      "prev_opinion": "매수",
+      "goal_price": 950000,
+      "dprt": "-35.37"
+    },
+    {
+      "date": "07.28",
+      "date_full": "20260728",
+      "broker": "신한투자증권",
+      "opinion": "매수",
+      "prev_opinion": "매수",
+      "goal_price": 1100000,
+      "dprt": "-44.18"
+    },
     {
       "date": "07.08",
       "date_full": "20260708",
@@ -871,24 +961,6 @@
       "dprt": "-28.75"
     },
     {
-      "date": "07.07",
-      "date_full": "20260707",
-      "broker": "DB증권",
-      "opinion": "BUY",
-      "prev_opinion": "BUY",
-      "goal_price": 1300000,
-      "dprt": "-34.23"
-    },
-    {
-      "date": "07.06",
-      "date_full": "20260706",
-      "broker": "IM증권",
-      "opinion": "BUY",
-      "prev_opinion": "BUY",
-      "goal_price": 1100000,
-      "dprt": "-20.73"
-    },
-    {
       "date": "07.02",
       "date_full": "20260702",
       "broker": "교보",
@@ -899,10 +971,10 @@
     }
   ],
   "target_consensus": {
-    "avg": 1200000,
+    "avg": 1027692,
     "high": 1300000,
-    "low": 1100000,
-    "count": 5,
+    "low": 800000,
+    "count": 13,
     "days": 30
   }
 }
