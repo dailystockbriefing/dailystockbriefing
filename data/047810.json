@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.07.30 20:16",
+  "updated_label": "2026.07.30 21:29",
   "trade_date": "2026.07.30",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -850,8 +850,62 @@
       "ratio": 5.48
     }
   ],
-  "short_pending": true,
+  "short_pending": false,
   "opinions": [
+    {
+      "date": "07.30",
+      "date_full": "20260730",
+      "broker": "LS증권",
+      "opinion": "Buy",
+      "prev_opinion": "Buy",
+      "goal_price": 190000,
+      "dprt": "-38.16"
+    },
+    {
+      "date": "07.30",
+      "date_full": "20260730",
+      "broker": "IM증권",
+      "opinion": "BUY",
+      "prev_opinion": "Hold",
+      "goal_price": 151000,
+      "dprt": "-22.19"
+    },
+    {
+      "date": "07.30",
+      "date_full": "20260730",
+      "broker": "삼성",
+      "opinion": "HOLD",
+      "prev_opinion": "HOLD",
+      "goal_price": 141000,
+      "dprt": "-16.67"
+    },
+    {
+      "date": "07.30",
+      "date_full": "20260730",
+      "broker": "유진투자",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 159000,
+      "dprt": "-26.10"
+    },
+    {
+      "date": "07.30",
+      "date_full": "20260730",
+      "broker": "대신",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 165000,
+      "dprt": "-28.79"
+    },
+    {
+      "date": "07.30",
+      "date_full": "20260730",
+      "broker": "신한투자증권",
+      "opinion": "매수",
+      "prev_opinion": "매수",
+      "goal_price": 140000,
+      "dprt": "-16.07"
+    },
     {
       "date": "07.23",
       "date_full": "20260723",
@@ -881,10 +935,10 @@
     }
   ],
   "target_consensus": {
-    "avg": 203333,
+    "avg": 172889,
     "high": 230000,
-    "low": 180000,
-    "count": 3,
+    "low": 140000,
+    "count": 9,
     "days": 30
   }
 }
