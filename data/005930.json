@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.07.31 20:39",
+  "updated_label": "2026.07.31 21:56",
   "trade_date": "2026.07.31",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -850,8 +850,35 @@
       "ratio": 0.06
     }
   ],
-  "short_pending": true,
+  "short_pending": false,
   "opinions": [
+    {
+      "date": "07.31",
+      "date_full": "20260731",
+      "broker": "삼성",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 400000,
+      "dprt": "-48.25"
+    },
+    {
+      "date": "07.31",
+      "date_full": "20260731",
+      "broker": "한국투자",
+      "opinion": "매수",
+      "prev_opinion": "매수",
+      "goal_price": 650000,
+      "dprt": "-68.15"
+    },
+    {
+      "date": "07.31",
+      "date_full": "20260731",
+      "broker": "신한투자증권",
+      "opinion": "매수",
+      "prev_opinion": "매수",
+      "goal_price": 450000,
+      "dprt": "-54.00"
+    },
     {
       "date": "07.29",
       "date_full": "20260729",
@@ -907,15 +934,6 @@
       "dprt": "-20.56"
     },
     {
-      "date": "07.03",
-      "date_full": "20260703",
-      "broker": "한국투자",
-      "opinion": "매수",
-      "prev_opinion": "매수",
-      "goal_price": 590000,
-      "dprt": "-51.53"
-    },
-    {
       "date": "07.01",
       "date_full": "20260701",
       "broker": "교보",
@@ -926,10 +944,10 @@
     }
   ],
   "target_consensus": {
-    "avg": 471250,
-    "high": 600000,
+    "avg": 468000,
+    "high": 650000,
     "low": 360000,
-    "count": 8,
+    "count": 10,
     "days": 30
   }
 }
