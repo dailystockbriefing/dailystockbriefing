@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.08.14 16:58",
+  "updated_label": "2026.08.14 20:43",
   "trade_date": "2026.08.14",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -12,7 +12,7 @@
       "NX": null
     },
     "prev_krx_close": 78000,
-    "after_nxt_close": false,
+    "after_nxt_close": true,
     "open": 78600,
     "high": 82000,
     "low": 76600,
@@ -36,7 +36,7 @@
             "은행": 0
           },
           "volume": {
-            "개인": 34793,
+            "개인": 34783,
             "외국인": -39328,
             "기관": -12691,
             "금융투자": -19637,
@@ -60,7 +60,7 @@
             "은행": 0
           },
           "volume": {
-            "개인": 34793,
+            "개인": 34783,
             "외국인": -39328,
             "기관": -12691,
             "금융투자": -19637,
@@ -769,18 +769,13 @@
     }
   ],
   "short_latest": {
-    "date": "2026.08.11",
-    "qty": 746228,
-    "ratio": 1.15,
-    "qty_change": 3990,
-    "qty_change_pct": 0.54
+    "date": "2026.08.12",
+    "qty": 722103,
+    "ratio": 1.11,
+    "qty_change": -24125,
+    "qty_change_pct": -3.23
   },
   "short_trend": [
-    {
-      "date": "07.29",
-      "qty": 686497,
-      "ratio": 1.06
-    },
     {
       "date": "07.30",
       "qty": 688315,
@@ -825,9 +820,14 @@
       "date": "08.11",
       "qty": 746228,
       "ratio": 1.15
+    },
+    {
+      "date": "08.12",
+      "qty": 722103,
+      "ratio": 1.11
     }
   ],
-  "short_pending": true,
+  "short_pending": false,
   "opinions": [
     {
       "date": "07.27",
