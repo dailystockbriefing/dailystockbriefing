@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.08.14 20:43",
+  "updated_label": "2026.08.17 16:45",
   "trade_date": "2026.08.14",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -12,7 +12,7 @@
       "NX": null
     },
     "prev_krx_close": 78000,
-    "after_nxt_close": true,
+    "after_nxt_close": false,
     "open": 78600,
     "high": 82000,
     "low": 76600,
@@ -827,7 +827,7 @@
       "ratio": 1.11
     }
   ],
-  "short_pending": false,
+  "short_pending": true,
   "opinions": [
     {
       "date": "07.27",

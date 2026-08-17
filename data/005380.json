@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.08.14 20:44",
+  "updated_label": "2026.08.17 16:46",
   "trade_date": "2026.08.14",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -7,12 +7,12 @@
     "ticker": "005380",
     "market": "KOSPI",
     "close_by_market": {
-      "UN": 459500,
+      "UN": 453000,
       "J": 453000,
       "NX": 459500
     },
     "prev_krx_close": 418500,
-    "after_nxt_close": true,
+    "after_nxt_close": false,
     "open": 424000,
     "high": 456000,
     "low": 421500,
@@ -850,7 +850,7 @@
       "ratio": 1.28
     }
   ],
-  "short_pending": false,
+  "short_pending": true,
   "opinions": [
     {
       "date": "08.07",
@@ -941,22 +941,13 @@
       "prev_opinion": "매수",
       "goal_price": 840000,
       "dprt": "-49.40"
-    },
-    {
-      "date": "07.15",
-      "date_full": "20260715",
-      "broker": "현대차",
-      "opinion": "BUY",
-      "prev_opinion": "BUY",
-      "goal_price": 630000,
-      "dprt": "-32.62"
     }
   ],
   "target_consensus": {
-    "avg": 712727,
+    "avg": 721000,
     "high": 900000,
     "low": 570000,
-    "count": 11,
+    "count": 10,
     "days": 30
   }
 }

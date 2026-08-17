@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.08.14 20:43",
+  "updated_label": "2026.08.17 16:46",
   "trade_date": "2026.08.14",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -7,12 +7,12 @@
     "ticker": "047810",
     "market": "KOSPI",
     "close_by_market": {
-      "UN": 146600,
+      "UN": 146400,
       "J": 146400,
       "NX": 146600
     },
     "prev_krx_close": 151200,
-    "after_nxt_close": true,
+    "after_nxt_close": false,
     "open": 149700,
     "high": 150400,
     "low": 145900,
@@ -850,7 +850,7 @@
       "ratio": 6.2
     }
   ],
-  "short_pending": false,
+  "short_pending": true,
   "opinions": [
     {
       "date": "08.11",
@@ -932,22 +932,13 @@
       "prev_opinion": "BUY",
       "goal_price": 230000,
       "dprt": "-35.09"
-    },
-    {
-      "date": "07.16",
-      "date_full": "20260716",
-      "broker": "한국투자",
-      "opinion": "매수",
-      "prev_opinion": "매수",
-      "goal_price": 200000,
-      "dprt": "-26.25"
     }
   ],
   "target_consensus": {
-    "avg": 176700,
+    "avg": 174111,
     "high": 230000,
     "low": 140000,
-    "count": 10,
+    "count": 9,
     "days": 30
   }
 }
