@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.08.26 16:26",
+  "updated_label": "2026.08.26 18:33",
   "trade_date": "2026.08.26",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -16,7 +16,7 @@
     "open": 99700,
     "high": 102800,
     "low": 97500,
-    "volume": 335561,
+    "volume": 341612,
     "marketcap": 3639008789400
   },
   "investors_hist": [
@@ -769,18 +769,13 @@
     }
   ],
   "short_latest": {
-    "date": "2026.08.21",
-    "qty": 26729,
-    "ratio": 0.07,
-    "qty_change": -3285,
-    "qty_change_pct": -10.94
+    "date": "2026.08.24",
+    "qty": 20361,
+    "ratio": 0.06,
+    "qty_change": -6368,
+    "qty_change_pct": -23.82
   },
   "short_trend": [
-    {
-      "date": "08.07",
-      "qty": 108280,
-      "ratio": 0.29
-    },
     {
       "date": "08.10",
       "qty": 111961,
@@ -825,9 +820,14 @@
       "date": "08.21",
       "qty": 26729,
       "ratio": 0.07
+    },
+    {
+      "date": "08.24",
+      "qty": 20361,
+      "ratio": 0.06
     }
   ],
-  "short_pending": true,
+  "short_pending": false,
   "opinions": [],
   "target_consensus": null
 }
