@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.08.28 04:37",
+  "updated_label": "2026.08.28 06:15",
   "trade_date": "2026.08.27",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -11,11 +11,11 @@
       "J": 73100,
       "NX": 90600
     },
-    "prev_krx_close": 71800,
+    "prev_krx_close": 73100,
     "after_nxt_close": false,
-    "open": 72500,
-    "high": 73800,
-    "low": 71800,
+    "open": 73100,
+    "high": 73100,
+    "low": 73100,
     "volume": 831146,
     "marketcap": 4738340538000
   },
