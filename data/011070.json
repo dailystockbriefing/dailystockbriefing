@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.09.02 22:23",
+  "updated_label": "2026.09.02 23:59",
   "trade_date": "2026.09.02",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -793,7 +793,7 @@
   ],
   "short_latest": null,
   "short_trend": [],
-  "short_pending": true,
+  "short_pending": false,
   "opinions": [
     {
       "date": "08.31",
