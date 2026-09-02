@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.09.02 20:36",
+  "updated_label": "2026.09.02 22:23",
   "trade_date": "2026.09.02",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -796,6 +796,15 @@
   "short_pending": true,
   "opinions": [
     {
+      "date": "09.02",
+      "date_full": "20260902",
+      "broker": "현대차",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 340000,
+      "dprt": "-36.76"
+    },
+    {
       "date": "08.14",
       "date_full": "20260814",
       "broker": "키움",
@@ -824,10 +833,10 @@
     }
   ],
   "target_consensus": {
-    "avg": 303333,
-    "high": 320000,
+    "avg": 312500,
+    "high": 340000,
     "low": 270000,
-    "count": 3,
+    "count": 4,
     "days": 30
   }
 }
