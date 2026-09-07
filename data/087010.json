@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.09.07 23:54",
+  "updated_label": "2026.09.08 01:37",
   "trade_date": "2026.09.07",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -7,12 +7,12 @@
     "ticker": "087010",
     "market": "KOSDAQ",
     "close_by_market": {
-      "UN": 161200,
+      "UN": 160200,
       "J": 160200,
       "NX": 161200
     },
     "prev_krx_close": 157300,
-    "after_nxt_close": true,
+    "after_nxt_close": false,
     "open": 161300,
     "high": 167500,
     "low": 155500,
