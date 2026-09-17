@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.09.17 23:16",
+  "updated_label": "2026.09.18 00:48",
   "trade_date": "2026.09.17",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -7,12 +7,12 @@
     "ticker": "047810",
     "market": "KOSPI",
     "close_by_market": {
-      "UN": 131000,
+      "UN": 130900,
       "J": 130900,
       "NX": 131000
     },
     "prev_krx_close": 125100,
-    "after_nxt_close": true,
+    "after_nxt_close": false,
     "open": 126400,
     "high": 132900,
     "low": 126400,
