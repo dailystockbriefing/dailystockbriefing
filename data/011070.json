@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.09.30 21:54",
+  "updated_label": "2026.10.01 00:46",
   "trade_date": "2026.09.30",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -7,12 +7,12 @@
     "ticker": "011070",
     "market": "KOSPI",
     "close_by_market": {
-      "UN": 563000,
+      "UN": 564000,
       "J": 564000,
       "NX": 563000
     },
     "prev_krx_close": 585000,
-    "after_nxt_close": true,
+    "after_nxt_close": false,
     "open": 589000,
     "high": 603000,
     "low": 552000,
@@ -812,22 +812,13 @@
       "prev_opinion": "BUY",
       "goal_price": 1000000,
       "dprt": "-46.80"
-    },
-    {
-      "date": "08.31",
-      "date_full": "20260831",
-      "broker": "현대차",
-      "opinion": "BUY",
-      "prev_opinion": "BUY",
-      "goal_price": 1030000,
-      "dprt": "-40.68"
     }
   ],
   "target_consensus": {
-    "avg": 983333,
-    "high": 1030000,
+    "avg": 960000,
+    "high": 1000000,
     "low": 920000,
-    "count": 3,
+    "count": 2,
     "days": 30
   }
 }
