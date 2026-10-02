@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.10.02 22:02",
+  "updated_label": "2026.10.03 00:31",
   "trade_date": "2026.10.02",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -12,7 +12,7 @@
       "NX": 347000
     },
     "prev_krx_close": 349000,
-    "after_nxt_close": true,
+    "after_nxt_close": false,
     "open": 346500,
     "high": 348000,
     "low": 343500,
@@ -812,22 +812,13 @@
       "prev_opinion": "BUY",
       "goal_price": 500000,
       "dprt": "-25.70"
-    },
-    {
-      "date": "09.02",
-      "date_full": "20260902",
-      "broker": "LS증권",
-      "opinion": "Buy",
-      "prev_opinion": "Buy",
-      "goal_price": 650000,
-      "dprt": "-38.38"
     }
   ],
   "target_consensus": {
-    "avg": 610000,
+    "avg": 590000,
     "high": 680000,
     "low": 500000,
-    "count": 3,
+    "count": 2,
     "days": 30
   }
 }

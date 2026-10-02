@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.10.02 22:01",
+  "updated_label": "2026.10.03 00:30",
   "trade_date": "2026.10.02",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -12,7 +12,7 @@
       "NX": 192200
     },
     "prev_krx_close": 191200,
-    "after_nxt_close": true,
+    "after_nxt_close": false,
     "open": 192800,
     "high": 193100,
     "low": 191000,
@@ -803,22 +803,13 @@
       "prev_opinion": "Buy",
       "goal_price": 293000,
       "dprt": "-33.89"
-    },
-    {
-      "date": "09.02",
-      "date_full": "20260902",
-      "broker": "현대차",
-      "opinion": "BUY",
-      "prev_opinion": "BUY",
-      "goal_price": 340000,
-      "dprt": "-36.76"
     }
   ],
   "target_consensus": {
-    "avg": 316500,
-    "high": 340000,
+    "avg": 293000,
+    "high": 293000,
     "low": 293000,
-    "count": 2,
+    "count": 1,
     "days": 30
   }
 }
