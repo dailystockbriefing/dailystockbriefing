@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.10.07 22:46",
+  "updated_label": "2026.10.08 01:13",
   "trade_date": "2026.10.07",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -12,7 +12,7 @@
       "NX": 1715000
     },
     "prev_krx_close": 1773000,
-    "after_nxt_close": true,
+    "after_nxt_close": false,
     "open": 1728000,
     "high": 1779000,
     "low": 1713000,
@@ -794,31 +794,6 @@
   "short_latest": null,
   "short_trend": [],
   "short_pending": true,
-  "opinions": [
-    {
-      "date": "09.07",
-      "date_full": "20260907",
-      "broker": "DB증권",
-      "opinion": "BUY",
-      "prev_opinion": "BUY",
-      "goal_price": 2300000,
-      "dprt": "-28.39"
-    },
-    {
-      "date": "09.07",
-      "date_full": "20260907",
-      "broker": "미래에셋",
-      "opinion": "매수",
-      "prev_opinion": "매수",
-      "goal_price": 3100000,
-      "dprt": "-46.87"
-    }
-  ],
-  "target_consensus": {
-    "avg": 2700000,
-    "high": 3100000,
-    "low": 2300000,
-    "count": 2,
-    "days": 30
-  }
+  "opinions": [],
+  "target_consensus": null
 }

@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.10.07 22:45",
+  "updated_label": "2026.10.08 01:13",
   "trade_date": "2026.10.07",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -12,7 +12,7 @@
       "NX": 269000
     },
     "prev_krx_close": 272000,
-    "after_nxt_close": true,
+    "after_nxt_close": false,
     "open": 269500,
     "high": 279500,
     "low": 268000,
@@ -803,22 +803,13 @@
       "prev_opinion": "BUY",
       "goal_price": 630000,
       "dprt": "-56.11"
-    },
-    {
-      "date": "09.07",
-      "date_full": "20260907",
-      "broker": "미래에셋",
-      "opinion": "매수",
-      "prev_opinion": "매수",
-      "goal_price": 400000,
-      "dprt": "-36.12"
     }
   ],
   "target_consensus": {
-    "avg": 515000,
+    "avg": 630000,
     "high": 630000,
-    "low": 400000,
-    "count": 2,
+    "low": 630000,
+    "count": 1,
     "days": 30
   }
 }
