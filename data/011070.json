@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.10.13 23:29",
+  "updated_label": "2026.10.14 01:54",
   "trade_date": "2026.10.13",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -12,7 +12,7 @@
       "NX": 454000
     },
     "prev_krx_close": 479500,
-    "after_nxt_close": true,
+    "after_nxt_close": false,
     "open": 460000,
     "high": 470000,
     "low": 433000,
