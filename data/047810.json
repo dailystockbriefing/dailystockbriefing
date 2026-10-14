@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.10.14 23:31",
+  "updated_label": "2026.10.15 01:04",
   "trade_date": "2026.10.14",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -12,7 +12,7 @@
       "NX": 111100
     },
     "prev_krx_close": 112200,
-    "after_nxt_close": true,
+    "after_nxt_close": false,
     "open": 111200,
     "high": 113200,
     "low": 109500,
@@ -830,22 +830,13 @@
       "prev_opinion": "매수",
       "goal_price": 186000,
       "dprt": "-31.51"
-    },
-    {
-      "date": "09.14",
-      "date_full": "20260914",
-      "broker": "IBK투자",
-      "opinion": "매수",
-      "prev_opinion": "매수",
-      "goal_price": 180000,
-      "dprt": "-27.50"
     }
   ],
   "target_consensus": {
-    "avg": 175600,
+    "avg": 174500,
     "high": 186000,
     "low": 160000,
-    "count": 5,
+    "count": 4,
     "days": 30
   }
 }
