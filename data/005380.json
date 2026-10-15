@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.10.15 23:06",
+  "updated_label": "2026.10.16 00:52",
   "trade_date": "2026.10.15",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -12,7 +12,7 @@
       "NX": 289500
     },
     "prev_krx_close": 313500,
-    "after_nxt_close": true,
+    "after_nxt_close": false,
     "open": 300000,
     "high": 302500,
     "low": 289000,
@@ -938,22 +938,13 @@
       "prev_opinion": "매수",
       "goal_price": 570000,
       "dprt": "-39.21"
-    },
-    {
-      "date": "09.15",
-      "date_full": "20260915",
-      "broker": "삼성",
-      "opinion": "BUY",
-      "prev_opinion": "BUY",
-      "goal_price": 500000,
-      "dprt": "-25.70"
     }
   ],
   "target_consensus": {
-    "avg": 568824,
+    "avg": 573125,
     "high": 700000,
     "low": 410000,
-    "count": 17,
+    "count": 16,
     "days": 30
   }
 }
