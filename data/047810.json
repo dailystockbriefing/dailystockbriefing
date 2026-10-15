@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.10.15 20:57",
+  "updated_label": "2026.10.15 23:06",
   "trade_date": "2026.10.15",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -796,6 +796,15 @@
   "short_pending": true,
   "opinions": [
     {
+      "date": "10.15",
+      "date_full": "20261015",
+      "broker": "다올투자",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 210000,
+      "dprt": "-47.14"
+    },
+    {
       "date": "10.14",
       "date_full": "20261014",
       "broker": "한국투자",
@@ -833,10 +842,10 @@
     }
   ],
   "target_consensus": {
-    "avg": 174500,
-    "high": 186000,
+    "avg": 181600,
+    "high": 210000,
     "low": 160000,
-    "count": 4,
+    "count": 5,
     "days": 30
   }
 }

@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.10.15 20:57",
+  "updated_label": "2026.10.15 23:06",
   "trade_date": "2026.10.15",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -796,6 +796,15 @@
   "short_pending": true,
   "opinions": [
     {
+      "date": "10.15",
+      "date_full": "20261015",
+      "broker": "IM증권",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 600000,
+      "dprt": "-47.75"
+    },
+    {
       "date": "10.12",
       "date_full": "20261012",
       "broker": "상상인",
@@ -941,10 +950,10 @@
     }
   ],
   "target_consensus": {
-    "avg": 566875,
+    "avg": 568824,
     "high": 700000,
     "low": 410000,
-    "count": 16,
+    "count": 17,
     "days": 30
   }
 }
