@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.10.23 23:15",
+  "updated_label": "2026.10.24 01:00",
   "trade_date": "2026.10.23",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -12,7 +12,7 @@
       "NX": 213500
     },
     "prev_krx_close": 214500,
-    "after_nxt_close": true,
+    "after_nxt_close": false,
     "open": 206000,
     "high": 215500,
     "low": 203500,
@@ -794,22 +794,6 @@
   "short_latest": null,
   "short_trend": [],
   "short_pending": true,
-  "opinions": [
-    {
-      "date": "09.23",
-      "date_full": "20260923",
-      "broker": "유안타",
-      "opinion": "BUY",
-      "prev_opinion": "BUY",
-      "goal_price": 630000,
-      "dprt": "-56.11"
-    }
-  ],
-  "target_consensus": {
-    "avg": 630000,
-    "high": 630000,
-    "low": 630000,
-    "count": 1,
-    "days": 30
-  }
+  "opinions": [],
+  "target_consensus": null
 }
