@@ -1,25 +1,102 @@
 {
-  "updated_label": "2026.10.30 02:40",
-  "trade_date": "2026.10.29",
+  "updated_label": "2026.10.30 22:23",
+  "trade_date": "2026.10.30",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
     "name": "현대차",
     "ticker": "005380",
     "market": "KOSPI",
     "close_by_market": {
-      "UN": 292000,
-      "J": 292000,
-      "NX": 292000
+      "UN": 278000,
+      "J": 278500,
+      "NX": 278000
     },
-    "prev_krx_close": 296000,
-    "after_nxt_close": false,
-    "open": 293000,
-    "high": 309500,
-    "low": 286500,
-    "volume": 1419635,
+    "prev_krx_close": 292500,
+    "after_nxt_close": true,
+    "open": 284000,
+    "high": 290000,
+    "low": 276000,
+    "volume": 981632,
     "marketcap": null
   },
   "investors_hist": [
+    {
+      "date": "10.30",
+      "markets": {
+        "UN": {
+          "value": {
+            "개인": 306,
+            "외국인": -383,
+            "기관": 97,
+            "금융투자": 42,
+            "투신": -23,
+            "사모": -9,
+            "연기금": 84,
+            "보험": 1,
+            "은행": 0
+          },
+          "volume": {
+            "개인": 110054,
+            "외국인": -136894,
+            "기관": 34077,
+            "금융투자": 14975,
+            "투신": -8134,
+            "사모": -3357,
+            "연기금": 29687,
+            "보험": 204,
+            "은행": 1
+          }
+        },
+        "J": {
+          "value": {
+            "개인": 170,
+            "외국인": -227,
+            "기관": 86,
+            "금융투자": 32,
+            "투신": -23,
+            "사모": -9,
+            "연기금": 84,
+            "보험": 1,
+            "은행": 0
+          },
+          "volume": {
+            "개인": 61519,
+            "외국인": -81174,
+            "기관": 30199,
+            "금융투자": 11207,
+            "투신": -8134,
+            "사모": -3357,
+            "연기금": 29687,
+            "보험": 204,
+            "은행": 1
+          }
+        },
+        "NX": {
+          "value": {
+            "개인": 136,
+            "외국인": -156,
+            "기관": 11,
+            "금융투자": 11,
+            "투신": 0,
+            "사모": 0,
+            "연기금": 0,
+            "보험": 0,
+            "은행": 0
+          },
+          "volume": {
+            "개인": 48535,
+            "외국인": -55720,
+            "기관": 3878,
+            "금융투자": 3768,
+            "투신": 0,
+            "사모": 0,
+            "연기금": 0,
+            "보험": 0,
+            "은행": 0
+          }
+        }
+      }
+    },
     {
       "date": "10.29",
       "markets": {
@@ -712,89 +789,120 @@
           }
         }
       }
-    },
-    {
-      "date": "10.16",
-      "markets": {
-        "UN": {
-          "value": {
-            "개인": -920,
-            "외국인": 797,
-            "기관": 153,
-            "금융투자": -122,
-            "투신": 132,
-            "사모": 45,
-            "연기금": 46,
-            "보험": 30,
-            "은행": 20
-          },
-          "volume": {
-            "개인": -296050,
-            "외국인": 256500,
-            "기관": 48939,
-            "금융투자": -38051,
-            "투신": 41648,
-            "사모": 14484,
-            "연기금": 14633,
-            "보험": 9363,
-            "은행": 6388
-          }
-        },
-        "J": {
-          "value": {
-            "개인": -671,
-            "외국인": 526,
-            "기관": 171,
-            "금융투자": -104,
-            "투신": 132,
-            "사모": 45,
-            "연기금": 46,
-            "보험": 30,
-            "은행": 20
-          },
-          "volume": {
-            "개인": -215135,
-            "외국인": 168742,
-            "기관": 54769,
-            "금융투자": -32221,
-            "투신": 41648,
-            "사모": 14484,
-            "연기금": 14633,
-            "보험": 9363,
-            "은행": 6388
-          }
-        },
-        "NX": {
-          "value": {
-            "개인": -249,
-            "외국인": 270,
-            "기관": -18,
-            "금융투자": -18,
-            "투신": 0,
-            "사모": 0,
-            "연기금": 0,
-            "보험": 0,
-            "은행": 0
-          },
-          "volume": {
-            "개인": -80915,
-            "외국인": 87758,
-            "기관": -5830,
-            "금융투자": -5830,
-            "투신": 0,
-            "사모": 0,
-            "연기금": 0,
-            "보험": 0,
-            "은행": 0
-          }
-        }
-      }
     }
   ],
   "short_latest": null,
   "short_trend": [],
   "short_pending": true,
   "opinions": [
+    {
+      "date": "10.30",
+      "date_full": "20261030",
+      "broker": "IBK투자",
+      "opinion": "매수",
+      "prev_opinion": "매수",
+      "goal_price": 460000,
+      "dprt": "-36.41"
+    },
+    {
+      "date": "10.30",
+      "date_full": "20261030",
+      "broker": "하나증권",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 480000,
+      "dprt": "-39.06"
+    },
+    {
+      "date": "10.30",
+      "date_full": "20261030",
+      "broker": "키움",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 500000,
+      "dprt": "-41.50"
+    },
+    {
+      "date": "10.30",
+      "date_full": "20261030",
+      "broker": "DB증권",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 500000,
+      "dprt": "-41.50"
+    },
+    {
+      "date": "10.30",
+      "date_full": "20261030",
+      "broker": "유안타",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 440000,
+      "dprt": "-33.52"
+    },
+    {
+      "date": "10.30",
+      "date_full": "20261030",
+      "broker": "현대차",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 470000,
+      "dprt": "-37.77"
+    },
+    {
+      "date": "10.30",
+      "date_full": "20261030",
+      "broker": "NH투자",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 440000,
+      "dprt": "-33.52"
+    },
+    {
+      "date": "10.30",
+      "date_full": "20261030",
+      "broker": "미래에셋",
+      "opinion": "매수",
+      "prev_opinion": "매수",
+      "goal_price": 650000,
+      "dprt": "-55.00"
+    },
+    {
+      "date": "10.30",
+      "date_full": "20261030",
+      "broker": "대신",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 500000,
+      "dprt": "-41.50"
+    },
+    {
+      "date": "10.30",
+      "date_full": "20261030",
+      "broker": "신한투자증권",
+      "opinion": "매수",
+      "prev_opinion": "매수",
+      "goal_price": 550000,
+      "dprt": "-46.82"
+    },
+    {
+      "date": "10.29",
+      "date_full": "20261029",
+      "broker": "삼성",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 410000,
+      "dprt": "-27.80"
+    },
+    {
+      "date": "10.29",
+      "date_full": "20261029",
+      "broker": "메리츠",
+      "opinion": "BUY",
+      "prev_opinion": "BUY",
+      "goal_price": 470000,
+      "dprt": "-37.02"
+    },
     {
       "date": "10.28",
       "date_full": "20261028",
@@ -834,33 +942,6 @@
     {
       "date": "10.12",
       "date_full": "20261012",
-      "broker": "키움",
-      "opinion": "BUY",
-      "prev_opinion": "BUY",
-      "goal_price": 600000,
-      "dprt": "-45.92"
-    },
-    {
-      "date": "10.12",
-      "date_full": "20261012",
-      "broker": "유안타",
-      "opinion": "BUY",
-      "prev_opinion": "BUY",
-      "goal_price": 410000,
-      "dprt": "-20.85"
-    },
-    {
-      "date": "10.12",
-      "date_full": "20261012",
-      "broker": "현대차",
-      "opinion": "BUY",
-      "prev_opinion": "BUY",
-      "goal_price": 500000,
-      "dprt": "-35.10"
-    },
-    {
-      "date": "10.12",
-      "date_full": "20261012",
       "broker": "KB",
       "opinion": "BUY",
       "prev_opinion": "BUY",
@@ -870,56 +951,11 @@
     {
       "date": "10.12",
       "date_full": "20261012",
-      "broker": "메리츠",
-      "opinion": "BUY",
-      "prev_opinion": "BUY",
-      "goal_price": 580000,
-      "dprt": "-44.05"
-    },
-    {
-      "date": "10.12",
-      "date_full": "20261012",
       "broker": "유진투자",
       "opinion": "BUY",
       "prev_opinion": "BUY",
       "goal_price": 600000,
       "dprt": "-45.92"
-    },
-    {
-      "date": "10.12",
-      "date_full": "20261012",
-      "broker": "신한투자증권",
-      "opinion": "매수",
-      "prev_opinion": "매수",
-      "goal_price": 630000,
-      "dprt": "-48.49"
-    },
-    {
-      "date": "10.08",
-      "date_full": "20261008",
-      "broker": "DB증권",
-      "opinion": "BUY",
-      "prev_opinion": "BUY",
-      "goal_price": 600000,
-      "dprt": "-44.00"
-    },
-    {
-      "date": "10.07",
-      "date_full": "20261007",
-      "broker": "하나증권",
-      "opinion": "BUY",
-      "prev_opinion": "BUY",
-      "goal_price": 510000,
-      "dprt": "-31.76"
-    },
-    {
-      "date": "10.07",
-      "date_full": "20261007",
-      "broker": "대신",
-      "opinion": "BUY",
-      "prev_opinion": "BUY",
-      "goal_price": 530000,
-      "dprt": "-34.34"
     },
     {
       "date": "10.07",
@@ -933,15 +969,6 @@
     {
       "date": "10.06",
       "date_full": "20261006",
-      "broker": "NH투자",
-      "opinion": "BUY",
-      "prev_opinion": "BUY",
-      "goal_price": 540000,
-      "dprt": "-35.83"
-    },
-    {
-      "date": "10.06",
-      "date_full": "20261006",
       "broker": "신영",
       "opinion": "매수",
       "prev_opinion": "매수",
@@ -950,10 +977,10 @@
     }
   ],
   "target_consensus": {
-    "avg": 565882,
+    "avg": 529500,
     "high": 700000,
     "low": 410000,
-    "count": 17,
+    "count": 20,
     "days": 30
   }
 }
