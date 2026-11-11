@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.11.11 23:40",
+  "updated_label": "2026.11.12 02:05",
   "trade_date": "2026.11.11",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -7,12 +7,12 @@
     "ticker": "000660",
     "market": "KOSPI",
     "close_by_market": {
-      "UN": 1290000,
+      "UN": 1291000,
       "J": 1291000,
       "NX": 1290000
     },
     "prev_krx_close": 1212000,
-    "after_nxt_close": true,
+    "after_nxt_close": false,
     "open": 1206000,
     "high": 1294000,
     "low": 1193000,
@@ -857,22 +857,13 @@
       "prev_opinion": "BUY",
       "goal_price": 3000000,
       "dprt": "-57.43"
-    },
-    {
-      "date": "10.12",
-      "date_full": "20261012",
-      "broker": "메리츠",
-      "opinion": "BUY",
-      "prev_opinion": "BUY",
-      "goal_price": 3200000,
-      "dprt": "-47.47"
     }
   ],
   "target_consensus": {
-    "avg": 3137500,
+    "avg": 3128571,
     "high": 3700000,
     "low": 2300000,
-    "count": 8,
+    "count": 7,
     "days": 30
   }
 }
