@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.11.13 23:50",
+  "updated_label": "2026.11.14 02:09",
   "trade_date": "2026.11.13",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -7,12 +7,12 @@
     "ticker": "047810",
     "market": "KOSPI",
     "close_by_market": {
-      "UN": 104400,
+      "UN": 104500,
       "J": 104500,
       "NX": 104400
     },
     "prev_krx_close": 107000,
-    "after_nxt_close": true,
+    "after_nxt_close": false,
     "open": 106400,
     "high": 109000,
     "low": 103800,
@@ -902,22 +902,13 @@
       "prev_opinion": "BUY",
       "goal_price": 146000,
       "dprt": "-27.53"
-    },
-    {
-      "date": "10.14",
-      "date_full": "20261014",
-      "broker": "한국투자",
-      "opinion": "매수",
-      "prev_opinion": "매수",
-      "goal_price": 170000,
-      "dprt": "-34.00"
     }
   ],
   "target_consensus": {
-    "avg": 155154,
+    "avg": 153917,
     "high": 190000,
     "low": 124000,
-    "count": 13,
+    "count": 12,
     "days": 30
   }
 }
