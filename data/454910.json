@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.11.17 04:22",
+  "updated_label": "2026.11.17 06:10",
   "trade_date": "2026.11.16",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -7,16 +7,16 @@
     "ticker": "454910",
     "market": "KOSPI",
     "close_by_market": {
-      "UN": 50000,
-      "J": 50000,
-      "NX": null
+      "UN": 49400,
+      "J": 49400,
+      "NX": 90600
     },
-    "prev_krx_close": 51900,
+    "prev_krx_close": 49400,
     "after_nxt_close": false,
-    "open": 52800,
-    "high": 54200,
-    "low": 49350,
-    "volume": 206427,
+    "open": 49400,
+    "high": 49400,
+    "low": 49400,
+    "volume": 0,
     "marketcap": null
   },
   "investors_hist": [
@@ -71,7 +71,30 @@
             "은행": 0
           }
         },
-        "NX": null
+        "NX": {
+          "value": {
+            "개인": 0,
+            "외국인": 0,
+            "기관": 0,
+            "금융투자": 0,
+            "투신": 0,
+            "사모": 0,
+            "연기금": 0,
+            "보험": 0,
+            "은행": 0
+          },
+          "volume": {
+            "개인": 0,
+            "외국인": 0,
+            "기관": 0,
+            "금융투자": 0,
+            "투신": 0,
+            "사모": 0,
+            "연기금": 0,
+            "보험": 0,
+            "은행": 0
+          }
+        }
       }
     },
     {
