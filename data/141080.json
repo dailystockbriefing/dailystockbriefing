@@ -1,5 +1,5 @@
 {
-  "updated_label": "2026.11.25 05:06",
+  "updated_label": "2026.11.25 06:20",
   "trade_date": "2026.11.24",
   "market_basis": "통합(KRX+NXT)",
   "stock": {
@@ -7,16 +7,16 @@
     "ticker": "141080",
     "market": "KOSDAQ",
     "close_by_market": {
-      "UN": 51400,
-      "J": 51400,
-      "NX": 51400
+      "UN": 52600,
+      "J": 52600,
+      "NX": 52600
     },
-    "prev_krx_close": 50400,
+    "prev_krx_close": 52600,
     "after_nxt_close": false,
-    "open": 52700,
-    "high": 53700,
-    "low": 50900,
-    "volume": 297237,
+    "open": 52600,
+    "high": 52600,
+    "low": 52600,
+    "volume": 0,
     "marketcap": null
   },
   "investors_hist": [
